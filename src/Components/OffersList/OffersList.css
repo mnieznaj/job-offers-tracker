@@ -1,0 +1,26 @@
+table{
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #2874A6;
+    color: #EBF5FB;
+    font-weight: 500;
+    text-align: left;
+}
+
+tr {
+    font-weight: 400;
+    background-color: #AED6F1;
+    color: #2874A6;
+}
+
+tr:nth-child(2n){
+    background-color: #EBF5FB;
+    color: #2874A6;
+}
+td{
+    width: calc((1200/13)px);
+}
