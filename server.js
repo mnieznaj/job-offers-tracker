@@ -12,7 +12,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const dbName = 'mongodb+srv://job-tracker:job-tracker-123@project-database.02zks.mongodb.net/list-of-offers?retryWrites=true&w=majority';
+const dbName = 'mongodb+srv://<user:password>@project-database.02zks.mongodb.net/<db-name>?retryWrites=true&w=majority';
 
 mongoose.connect(dbName, { useNewUrlParser: true, useUnifiedTopology: true})
     .then(response => {
