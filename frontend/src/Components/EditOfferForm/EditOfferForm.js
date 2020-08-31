@@ -83,7 +83,7 @@ const EditOfferForm = (props) => {
                 <input type="checkbox" id="applied" name="applied" />
                 <label htmlFor="description">Description:</label>
                 <textarea id="description" name="description" rows="10" cols="30"></textarea>
-                <button type="submit">Add Offer</button>
+                <button type="submit">Update Offer</button>
             </form>
         </div>
     )

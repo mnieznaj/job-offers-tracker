@@ -18,7 +18,7 @@ class OffersList extends Component {
     render(){
         const offers = [...this.state.offers];
         
-        const list = offers.map(offer => <SingleOffer offer={offer} key={offer}/>);
+        const list = offers.map(offer => <SingleOffer offer={offer} key={offer._id} offerFormHandler={this.props.offerFormHandler} setFormType={this.props.setFormType} setId={this.props.setId}/>);
         return (
             <table>
                 <thead>
@@ -32,6 +32,7 @@ class OffersList extends Component {
                         <th>Paygrade</th>
                         <th>Favorite</th>
                         <th>Applied</th>
+                        <th>Description</th>
                         <th>Stage 1</th>
                         <th>Stage 2</th>
                         <th>Got the job</th>

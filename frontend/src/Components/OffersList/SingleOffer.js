@@ -4,7 +4,6 @@ const SingleOffer = (props) => {
     const data = props.offer;
 
     const deleteOfferHandler = () => {
-        // event.preventDefault();
         const id = data._id;
         document.getElementById(id).remove();
         
@@ -28,13 +27,21 @@ const SingleOffer = (props) => {
             <td>{data.city}</td>
             <td>{data.field}</td>
             <td>{data.paygrade}</td>
-            <td>{data.favorite}</td>
-            <td>{data.applied}</td>
+            <td>{data.favorite ? "true" : "false"}</td>
+            <td>{data.applied ? "true" : "false"}</td>
             <td>{data.description}</td>
-            <td>{data.stage1}</td>
-            <td>{data.stage2}</td>
-            <td>{data.gotTheJob}</td>
+            <td>{data.stage1 ? "true" : "false"}</td>
+            <td>{data.stage2 ? "true" : "false"}</td>
+            <td>{data.gotTheJob ? "true" : "false"}</td>
             <td onClick={deleteOfferHandler}>x</td>
+            <td onClick={() => {
+                props.offerFormHandler("edit");
+                alert("click edit");
+                props.setFormType("edit");
+                alert("click id");
+                console.log("click id: "+ data._id);
+                props.setId(data._id)
+                }}>edit</td>
         </tr>
     )
 }
