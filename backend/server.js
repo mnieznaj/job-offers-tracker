@@ -23,6 +23,12 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
+mongoose.set("useUnifiedTopology", true);
+
 // app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
@@ -60,6 +66,15 @@ app.get("/test", (req, res) => {
   res.json(test);
 });
 
+app.get("/get-offer-list/:id", (req, res) => {
+  console.log(req.params.id);
+  AddJobOffer.findById(req.params.id)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => console.log(err));
+});
+
 app.get("/get-offer-list", (req, res) => {
   AddJobOffer.find()
     .then((response) => {
@@ -68,18 +83,25 @@ app.get("/get-offer-list", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+
 app.post("/add-offer", (req, res) => {
-  console.log(req.body);
   const offer = new AddJobOffer(req.body); //not sure about json here
   console.log(offer);
-  offer
-    .save()
+  offer.save()
     .then((result) => {
       console.log(result);
     })
     .catch((err) => console.log(err));
   res.status(200);
 });
+
+app.put("/edit-offer/:id", (req, res) => {
+  AddJobOffer.findByIdAndUpdate(req.params.id,req.body)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => console.log(err));
+})
 
 app.delete("/delete-offer/:id", (req, res) => {
   const id = req.body.id;
