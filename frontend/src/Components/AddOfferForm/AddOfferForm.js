@@ -3,6 +3,9 @@ import './AddOfferForm.css';
 
 const AddOfferForm = (props) => {
 
+    // const offerType = props.type;
+    // let requestType = offerType === "add" ? submitFormHandler : offerType === "edit" ? editOfferHandler : alert("Error occured, please try again later");
+
     const getFormData = () => {
         const formData = {};
         formData.title = document.getElementById('title').value;
@@ -33,6 +36,8 @@ const AddOfferForm = (props) => {
         .then(data => console.log(data))
         .catch(err => console.log(err));
     }
+
+    
 
     return(
             <div className="offer-form">
