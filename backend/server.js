@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 
 const AddJobOffer = require("./models/addJobOffer");
-const dbName = require('./dbKey');
+const dbName = require('./dbKey/dbKey');
 
 // allowing cors for dev purposes, delete on deployment
 // const cors = require("cors");
