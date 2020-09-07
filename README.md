@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Idea #
 
-## Available Scripts
+Project was created to help me and my friends to keeps track of job offers we apply to, as we try to emigrate to anywhere in Western Europe (thus country and city fields to track offers). I wanted something more appealing than a regular Excel document, that would be accessible from any device.
 
-In the project directory, you can run:
+At first it was supposed to be running based on local storage. But I decided that as a Frondend Dev I will have to learn how does Backend work, so I have watched a Node.js Crash Course to get a brief understanding of Backend. Not much, just enough to write my own backend for this app.
 
-### `npm start`
+# UI Design #
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Current UI Design is temporary.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The right UI Design is on its way, being created by https://www.behance.net/karolinzielis
 
-### `npm test`
+# Tech Used #
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Frontend:
+- React with Redux - I would love to develop this App further in the future, and I have not tried learning Hooks yet (it is on my list). Redux felt like a more friendly way of managing the state, so I won't have to pass references throught multiple layers of components (I tried it in the beggining, but didn't feel comfortable);
+- Basic CSS for now, because the Project is not too complex yet. Problably I will switch to SASS in the future;
 
-### `npm run build`
+Backend:
+- Node.js with Mongoose;
+- EJS as view engin;
+- Passport to handle authorization;
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Live Version #
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Live version is yet to be deployed. There will be a test user with timer set to reset its data every full hour (or half an hour) to try it without the need of creating a new account.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Local Project Set-up #
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The Backend is currently setup for local development with proxy set for front-back connection (setting up CORS was a nightmare, but I managed to make it work ^^). Just create a Mongo database and connect it in backend to run the demo on your local machine.
