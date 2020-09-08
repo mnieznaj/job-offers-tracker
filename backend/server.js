@@ -1,9 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const flash = require("connect-flash");
+const session = require("express-session");
+const passport = require('passport');
+
+// App Deplyoment https://create-react-app.dev/docs/deployment/
+
+// passport config
+require('./config/passport')(passport);
 
 const AddJobOffer = require("./models/addJobOffer");
-const dbName = require('./dbKey/dbKey');
+const dbName = require('./config/dbKeys');
 
 // allowing cors for dev purposes, delete on deployment
 // const cors = require("cors");
@@ -16,7 +24,7 @@ const PORT = process.env.PORT || 8080;
 
 
 mongoose
-  .connect(dbName, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbName.offers, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((response) => {
     console.log("connected to db");
     app.listen(PORT, () => console.log(`listening on port ${PORT}`));
@@ -32,8 +40,30 @@ mongoose.set("useUnifiedTopology", true);
 // app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); //extended: false allows to get data from requests body
 // app.use(express.json());
+
+// Express Session
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// global vars for colors of msg's errors
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+})
+
 app.use(morgan("dev"));
 
 // enabling cors
@@ -54,6 +84,13 @@ app.use(
     type: ["application/json", "text/plain"],
   })
 );
+
+// Routes
+app.use('/users', require('./routes/users.js'));
+
+// coś się zjebało z get requestem dla listy jak dodałem poniższe
+app.use('/app', require('./routes/app-router.js'));
+
 
 app.get("/", (req, res) => {
   res.render("index");
