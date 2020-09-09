@@ -1,0 +1,2 @@
+https://flaviocopes.com/react-server-side-rendering/
+https://create-react-app.dev/docs/deployment/

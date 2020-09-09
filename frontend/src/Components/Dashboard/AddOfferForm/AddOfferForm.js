@@ -1,6 +1,11 @@
 import React from 'react';
 import './AddOfferForm.css';
 
+import { connect } from 'react-redux';
+import { displayAddOfferForm } from '../../../store/actions/dashboardActions';
+
+import { setAuthHeader } from '../../../utils/setAuthHeader';
+
 const AddOfferForm = (props) => {
 
     const getFormData = () => {
@@ -21,12 +26,14 @@ const AddOfferForm = (props) => {
     const submitFormHandler = event => {
         event.preventDefault();
         const data = getFormData();
+        data.userId = "5f4e08c7d2ef258e7d34b2de";
         console.log(data);
-        fetch("/add-offer", {
+
+        const token = localStorage.getItem("token");
+        fetch("/app/add-offer", {
             method:'POST',
             mode: 'cors',
-            headers: {'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "cors"},
+            headers: setAuthHeader(token),
             body: JSON.stringify(data)
         })
         .then(response => response.json())
@@ -36,7 +43,7 @@ const AddOfferForm = (props) => {
 
     return(
             <div className="offer-form">
-                <div className="offer-form__background" onClick={props.hide}></div>
+                <div className="offer-form__background" onClick={() => props.displayAddOffer(false)}></div>
                 <form className="offer-form__form" onSubmit={submitFormHandler.bind(this)}>
                     <label htmlFor="title">Title:</label>
                     <input type="text" id="title" name="title" required />
@@ -65,4 +72,16 @@ const AddOfferForm = (props) => {
 
 }
 
-export default AddOfferForm;
+const mapStateToProps = state => {
+    return {
+        userId: state.userId
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        displayAddOffer: (hide) => dispatch(displayAddOfferForm(hide))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddOfferForm);

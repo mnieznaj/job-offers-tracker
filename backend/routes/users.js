@@ -2,35 +2,23 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+
 
 const User = require('../models/User');
 
-// login page
-// router.get('/login', (req,res) => {
-//     res.render('login')
-// });
-
-// register page
-// router.get('/register', (req,res) => {
-//     res.render('register')
-// });
-
-// reister handler
 router.post('/register-user', (req, res) => {
     const {name, email, password, repeatPassword} = req.body;
     let errors = [];
 
-    // check required fields
     if(!name || !email || !password || !repeatPassword){
         errors.push({msg: "Please fill in all fields"})
     }
 
-    // check passwords match
     if(password !== repeatPassword){
         errors.push({msg: 'Passwords do not match'});
     }
 
-    // check pass length
     if(password.length < 6){
         errors.push({msg: 'Password should be at least 6 characters'});
     }
@@ -44,7 +32,6 @@ router.post('/register-user', (req, res) => {
             repeatPassword
         })
     }else{
-        // Validation passed
         User.findOne({email: email})
             .then(user => {
                 let newUser;
@@ -65,16 +52,12 @@ router.post('/register-user', (req, res) => {
                     })
                 }
 
-                // hash password
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
-                        // set password to hashed
                         newUser.password = hash;
-                        // save user
                         newUser.save().
                             then(user => {
-                                // req.flash('success_msg', 'You are now Registered and can log in');
                                 res.send({ msg: "user created and added successfully"})
                             })
                             .catch(err => console.log(err))
@@ -84,18 +67,28 @@ router.post('/register-user', (req, res) => {
     }
 });
 
-// Login handle
-router.post('/login-user', async (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/app',
-        failureRerirect: '/users/login'
-        // , failureFlash: true
-    })(req, res, next);
+router.post('/login-user', (req, res, next) => {
+    passport.authenticate('local', {session: false}, (err, user, info) => {
+        if (err || !user) {
+            return res.status(400).json({
+                message: 'Something is not right',
+                user   : user
+            });
+        }
+       req.login(user, {session: false}, (err) => {
+           if (err) {
+               return res.send(err);
+           }
+           // generate a signed json web token with the contents of user object and return it in the response
+            const token = jwt.sign(user.toJSON(), 'your_jwt_secret', {expiresIn: "7d"});
+           return res.json({token});
+        });
+        console.log("Check for response being send")
+    })(req, res);
 })
-// Logout handle
+
 router.get('/logout-user', (req, res) => {
     req.logout();
-    // can put here a message eg. res.send(smth)
     res.redirect('/');
 });
 

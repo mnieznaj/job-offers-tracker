@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+import { displayUpdateOfferForm } from '../../../store/actions/dashboardActions';
+
+import { setAuthHeader } from '../../../utils/setAuthHeader';
+
 const EditOfferForm = (props) => {
     const id = props.id;
     console.log("id from component input: "+id);
@@ -7,7 +12,11 @@ const EditOfferForm = (props) => {
     const setFormData = (id) => {
         let formData;
         console.log(id);
-        fetch(`/get-offer-list/${id}`)
+        const token= localStorage.getItem("token");
+        fetch(`/app/get-offer-list/${id}`,{
+            method: "GET",
+            headers: setAuthHeader(token)
+        })
             .then(response => response.json())
             .then(data => {
                 console.log("data from get offer by id: " + data);
@@ -45,11 +54,12 @@ const EditOfferForm = (props) => {
     const editOfferHandler = (event) => {
         event.preventDefault();
         const data = getFormData();
-        
-        fetch(`/edit-offer/${id}`, {
+
+        const token= localStorage.getItem("token");
+        fetch(`/app/edit-offer/${id}`, {
             method:'PUT',
             mode: 'cors',
-            headers: {'Content-Type': 'application/json'},
+            headers: setAuthHeader(token),
             body: JSON.stringify({...data})
         })
         .then(response => response.json())
@@ -61,7 +71,7 @@ const EditOfferForm = (props) => {
 
     return(
         <div className="offer-form">
-            <div className="offer-form__background" onClick={props.hide}></div>
+            <div className="offer-form__background" onClick={() => props.showUpdateOffer(false)}></div>
             <form className="offer-form__form" onSubmit={editOfferHandler.bind(this)}>
                 <label htmlFor="title">Title:</label>
                 <input type="text" id="title" name="title" required />
@@ -89,4 +99,15 @@ const EditOfferForm = (props) => {
     )
 }
 
-export default EditOfferForm;
+const mapStateToProps = (state) => {
+    return{
+        id: state.currentOfferId
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showUpdateOffer: (show) => dispatch(displayUpdateOfferForm(show))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditOfferForm);

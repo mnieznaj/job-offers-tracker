@@ -21,6 +21,3 @@ tr:nth-child(2n){
     background-color: #EBF5FB;
     color: #2874A6;
 }
-td{
-    width: calc((1200/13)px);
-}

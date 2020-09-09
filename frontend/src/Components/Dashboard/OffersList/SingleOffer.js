@@ -1,5 +1,11 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+import { currentOfferId, displayUpdateOfferForm } from '../../../store/actions/dashboardActions';
+
+import { setAuthHeader } from "../../../utils/setAuthHeader"; 
+
+
 const SingleOffer = (props) => {
     const data = props.offer;
 
@@ -7,10 +13,11 @@ const SingleOffer = (props) => {
         const id = data._id;
         document.getElementById(id).remove();
         
-        fetch(`/delete-offer/${id}`, {
+        const token = localStorage.getItem("token");
+        fetch(`/app/delete-offer/${id}`, {
             method:'DELETE',
             mode: 'cors',
-            headers: {'Content-Type': 'application/json'},
+            headers: setAuthHeader(token),
             body: JSON.stringify({id : data._id})
         })
         .then(response => response.json())
@@ -35,15 +42,29 @@ const SingleOffer = (props) => {
             <td>{data.gotTheJob ? "true" : "false"}</td>
             <td onClick={deleteOfferHandler}>x</td>
             <td onClick={() => {
-                props.offerFormHandler("edit");
-                alert("click edit");
-                props.setFormType("edit");
-                alert("click id");
+                // props.offerFormHandler("edit");
+                // alert("click edit");
+                // props.setFormType("edit");
+                // alert("click id");
+                props.showUpdateOffer(true, data._id)
                 console.log("click id: "+ data._id);
-                props.setId(data._id)
+                props.setOfferId(data._id)
                 }}>edit</td>
         </tr>
     )
 }
 
-export default SingleOffer;
+const mapStateToProps = state => {
+    return {
+        // formType: state.formType,
+        currentOfferId: state.currentOfferId
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        setOfferId: (id) => dispatch(currentOfferId(id)),
+        showUpdateOffer: (show, id) => dispatch(displayUpdateOfferForm(show, id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleOffer);
