@@ -41,15 +41,7 @@ const App = (props) => {
         
         {form}
         <div style={{display : "flex", flexDirection : "column"}}>
-          <nav>
-              <Link to={`${url}/app`}><img src="/"/></Link>
-              <ul>
-                  <NavLink to={`${url}/app`}>Add</NavLink>
-                  <NavLink to={`${url}/app/dashboard`}>Dashboard</NavLink>
-                  <NavLink to={`${url}/app/profile`}>Profile</NavLink>
-                  <Link to={`${url}/`} >Logout</Link>
-              </ul>
-          </nav>
+          <Nav />
             <Switch>
                 <Route path={`${path}/profile`} component={Profile} />
                 <Route path={`${path}/dashboard`} component={Dashboard} />
