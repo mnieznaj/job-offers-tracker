@@ -12,9 +12,6 @@ const Dashboard = (props) => {
       <h2>Dashboard</h2>
       <button onClick={() => props.displayAddOffer(true)}>Add new offer</button>
       <OffersList />
-      {/* <span>{this.state.showAddOffer.toString()}</span><br/>
-      <span>{this.state.formType}</span><br/>
-      <span>{this.state.offerId}</span> */}
     </div>
   );
 }

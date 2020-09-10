@@ -1,14 +1,13 @@
 import React from 'react';
-
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { Route, Switch, useRouteMatch, NavLink, Link, useParams } from 'react-router-dom';
 
 import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard';
 import AddOfferForm from './Components/Dashboard/AddOfferForm/AddOfferForm';
 import EditOfferForm from './Components/Dashboard/EditOfferForm/EditOfferForm';
-
-// import Register from './Components/Login/Register';
-import Login from './Components/Login/Login';
+import Nav from './Components/Dashboard/Nav/Nav';
+import Profile from './Components/Dashboard/Profile/Profile';
 
 const App = (props) => {
 
@@ -34,15 +33,29 @@ const App = (props) => {
       form = null;
     }
 
+    let { path, url } = useRouteMatch();
+    console.log("Path: " + path + ". url: " + url);
 
     return (
       <div className="App">
+        
         {form}
-        <div style={{display : "flex", flexDirection : "row"}}>
-          <Login />
-          {/* <Register /> */}
+        <div style={{display : "flex", flexDirection : "column"}}>
+          <nav>
+              <Link to={`${url}/app`}><img src="/"/></Link>
+              <ul>
+                  <NavLink to={`${url}/app`}>Add</NavLink>
+                  <NavLink to={`${url}/app/dashboard`}>Dashboard</NavLink>
+                  <NavLink to={`${url}/app/profile`}>Profile</NavLink>
+                  <Link to={`${url}/`} >Logout</Link>
+              </ul>
+          </nav>
+            <Switch>
+                <Route path={`${path}/profile`} component={Profile} />
+                <Route path={`${path}/dashboard`} component={Dashboard} />
+                <Route path={`${path}`} component={Dashboard} />
+            </Switch>
         </div>
-        <Dashboard />
       </div>
     );
   // }

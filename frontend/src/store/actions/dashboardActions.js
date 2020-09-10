@@ -42,3 +42,8 @@ export const setUserToken = (token) => {
         token: token
     }
 }
+export const deleteUserToken = () => {
+    return {
+        type: actionTypes.DELETE_USER_TOKEN
+    }
+}

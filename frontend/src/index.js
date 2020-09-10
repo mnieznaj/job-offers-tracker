@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Home from './Components/Home/Home';
 import * as serviceWorker from './serviceWorker';
 
 // REDUX
 import { createStore } from 'redux';
 import reducer from './store/reducers/dashboardHandler';
 import { Provider } from 'react-redux';
+
+// Router
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 
 const store = createStore(reducer);
 
@@ -18,7 +23,13 @@ store.subscribe(() => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <ProtectedRoute path="/app" component={App} />
+        </Switch>
+        {/* {localStorage.getItem('token') ? <Route path="/app"><App /></Route> : <Route path="/"><Home /></Route>} */}
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

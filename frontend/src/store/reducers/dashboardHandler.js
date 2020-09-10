@@ -44,6 +44,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 userToken: action.token
             }
+        case actionTypes.DELETE_USER_TOKEN:
+            return {
+                ...state,
+                userToken: null
+            }
         // case actionTypes.SHOW_ADD_OFFER:
         //     return {
         //         ...state,
