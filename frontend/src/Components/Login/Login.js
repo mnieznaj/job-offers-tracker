@@ -1,7 +1,7 @@
 import React from 'react';
 import './Login.css';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { setUserToken } from '../../store/actions/dashboardActions';
 
 const Login = (props) => {
@@ -24,7 +24,6 @@ const Login = (props) => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data.token);
             props.setToken(data.token);
             return data
         })
@@ -32,10 +31,10 @@ const Login = (props) => {
             if(!localStorage.getItem("token") || localStorage.getItem("token") === undefined){
                 localStorage.setItem("token", data.token);
             }
+            window.location.href = window.location + "app";
             return data
         })
-        .then(data => console.log(data))
-        .catch(err => console.log(err)); //redirect on success
+        .catch(err => console.log(err));
     }
     return(
         <div className="login">

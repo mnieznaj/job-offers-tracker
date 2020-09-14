@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Login from '../Login/Login';
 import Register from '../Login/Register';
 
-const Home = () => {
-    const link = localStorage.getItem('token') ? <button><Link to="/app">Go to Dashboard</Link></button> : null;
+const Home = (props) => {
 
     return (
         <React.Fragment>
-            {link}
+            {localStorage.getItem('token') ? <Redirect to="/app/"/> : null}
             <h1>Home</h1>
             <Login />
             <Register />

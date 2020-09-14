@@ -32,12 +32,20 @@ router.get("/get-offer-list", (req, res) => {
 router.post("/add-offer", (req, res) => {
     const offer = new AddJobOffer(req.body); //not sure about json here
     console.log(offer);
-    offer.save()
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.log(err));
-    res.status(200);
+    if(!offer.favRating){
+      offer.favRating = 0;
+    }
+    if(!((offer.status === "none") || (offer.status === 'applied') || (offer.status === "rejected") || (offer.status === "succeded"))){
+      return res.json({msg: "wrong status set for offer"});
+    } else {
+      console.log("test przed zapisem");
+      offer.save()
+        .then((result) => {
+          console.log("To zapisano w bazie: "+result);
+        })
+        .catch((err) => console.log(err));
+      res.status(200);
+    }
 });
   
 router.put("/edit-offer/:id", (req, res) => {

@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
+.offer-list_item{
+    display: block;
+    max-width: 940px;
+    margin-bottom: 5px;
+}
+
+.offer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.offer-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%
+}
+
+.offer-header__button{
+    display: block;
+    width: 33px;
+    height: 33px;
+    background-color: #ffffff;
+    border: none;
+    color: #D6D7DD;
+}
+
+.offer-body{
+    max-width: 940px;
+    display: grid;
+    column-gap: 10px;
+    grid-template-areas:"header"
+                        "section-wrap"
+                        "desc";
+}
+
+.offer-body__header-section{
+    display: block;
+    width: 100%;
+    grid-area: header;
+}
+
+.offer-body__header-section--title{
+    font-family: 'Bree Serif', serif;
+    font-size: 44px;
+    margin-bottom: 15px;
+}
+
+.offer-body__header-section--rating{
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.offer-body__header-section--status{
+    margin-bottom: 25px;
+}
+.offer-body__section-wrap{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-area: section-wrap;
+}
+.offer-body__location-section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-area: location;
+}
+.offer-body__location-section > * {
+    margin-bottom: 10px;
+}
+
+.offer-body__location-section--company{
+    font-weight: 600;
+    font-size: 24px;
+    color: #2E365C;
+}
+
+/* .offer-body__location-section--paygrade{
+
+} */
+
+.offer-body__location-section--location > a{
+    text-align: right;
+}
+
+.offer-body__link-section{
+    display: block;
+    width: 100%;
+    grid-area: link;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.offer-body__description-section{
+    display: block;
+    width: 100%;
+    grid-area: desc;
+}
+
+.offer-body__description-section--description{
+    text-align: left;
+}
+
+@media (min-width: 1000px){
+    .offer-body{
+        width: 100%;
+        display: grid;
+        grid-template-areas:"header section-wrap"
+                            "desc section-wrap";
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 70% 300px;
+    }
+
+    .offer-body__link-section{
+        align-items: end;
+        margin-bottom: 0px;
+    }
+    .offer-body__section-wrap{
+        justify-content: space-between;
+    }
+}

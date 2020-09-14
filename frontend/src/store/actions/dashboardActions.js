@@ -1,12 +1,5 @@
 import * as actionTypes from './actionTypes';
 
-// export const setFormType = (formType) => {
-//     return {
-//         type: actionTypes.SET_FORM_TYPE,
-//         formType: formType
-//     }
-// }
-
 export const currentOfferId = (id) => {
     return {
         type: actionTypes.CURRENT_OFFER_ID,
@@ -45,5 +38,11 @@ export const setUserToken = (token) => {
 export const deleteUserToken = () => {
     return {
         type: actionTypes.DELETE_USER_TOKEN
+    }
+}
+export const setOffersFilter = (filter) => {
+    return {
+        type: actionTypes.OFFERS_FILTER,
+        filter: filter
     }
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { displayUpdateOfferForm } from '../../../store/actions/dashboardActions';
+import { displayUpdateOfferForm } from '../../../../store/actions/dashboardActions';
 
-import { setAuthHeader } from '../../../utils/setAuthHeader';
+import { setAuthHeader } from '../../../../utils/setAuthHeader';
+import '../Form.css';
 
 const EditOfferForm = (props) => {
     const id = props.id;
@@ -29,8 +30,8 @@ const EditOfferForm = (props) => {
                 document.getElementById('city').value = formData.city;
                 document.getElementById('field').value = formData.field;
                 document.getElementById('paygrade').value = formData.paygrade;
-                formData.favorite ? document.getElementById('favorite').checked = true :  document.getElementById('favorite').checked = false;
-                formData.applied ? document.getElementById('applied').checked = true : document.getElementById('applied').checked = false;
+                document.getElementById('status').selectedIndex = formData.status;
+                document.getElementById('favRating').selectedIndex = formData.favRating -1;
                 document.getElementById('description').value = formData.description;
             })
             .catch(err => console.log(err));  
@@ -45,8 +46,12 @@ const EditOfferForm = (props) => {
         formData.city = document.getElementById('city').value;
         formData.field = document.getElementById('field').value;
         formData.paygrade = document.getElementById('paygrade').value;
-        formData.favorite = document.getElementById('favorite').checked ? true : false;
-        formData.applied = document.getElementById('applied').checked ? true : false;
+        
+        const status = document.getElementById('status');
+        formData.status = status.options[status.selectedIndex].value;
+        console.log(formData.status);
+        const favRating = document.getElementById('favRating');
+        formData.favRating = favRating.options[favRating.selectedIndex].value;
         formData.description = document.getElementById('description').value;
         return formData;
     }
@@ -87,10 +92,21 @@ const EditOfferForm = (props) => {
                 <input type="text" id="field" name="field" />
                 <label htmlFor="paygrade">Paygrade:</label>
                 <input type="text" id="paygrade" name="paygrade"  />
-                <label htmlFor="favorite">Favorite:</label>
-                <input type="checkbox" id="favorite" name="favorite" />
-                <label htmlFor="applied">Applied:</label>
-                <input type="checkbox" id="applied" name="applied" />
+                <label htmlFor="favRating">Rate offer:</label>
+                    <select id="favRating" name="favRating">
+                        <option value="1" name="1">1</option>
+                        <option value="2" name="2">2</option>
+                        <option value="3" name="3">3</option>
+                        <option value="4" name="4">4</option>
+                        <option value="5" name="5">5</option>
+                    </select>
+                <label htmlFor="status">Status:</label>
+                <select id="status" name="status">
+                        <option value="none">none</option>
+                        <option value="applied">applied</option>
+                        <option value="rejected">rejected</option>
+                        <option value="succeded">succeded</option>
+                </select>
                 <label htmlFor="description">Description:</label>
                 <textarea id="description" name="description" rows="10" cols="30"></textarea>
                 <button type="submit">Update Offer</button>

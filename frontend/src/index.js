@@ -12,7 +12,6 @@ import { Provider } from 'react-redux';
 
 // Router
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
 
 const store = createStore(reducer);
 
@@ -26,7 +25,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
-          <ProtectedRoute path="/app" component={App} />
+          <Route path="/app" component={App} />
         </Switch>
         {/* {localStorage.getItem('token') ? <Route path="/app"><App /></Route> : <Route path="/"><Home /></Route>} */}
       </BrowserRouter>

@@ -1,10 +1,10 @@
 import React from 'react';
-import './AddOfferForm.css';
 
 import { connect } from 'react-redux';
-import { displayAddOfferForm } from '../../../store/actions/dashboardActions';
+import { displayAddOfferForm } from '../../../../store/actions/dashboardActions';
 
-import { setAuthHeader } from '../../../utils/setAuthHeader';
+import { setAuthHeader } from '../../../../utils/setAuthHeader';
+import '../Form.css';
 
 const AddOfferForm = (props) => {
 
@@ -17,8 +17,12 @@ const AddOfferForm = (props) => {
         formData.city = document.getElementById('city').value;
         formData.field = document.getElementById('field').value;
         formData.paygrade = document.getElementById('paygrade').value;
-        formData.favorite = document.getElementById('favorite').checked ? true : false;
-        formData.applied = document.getElementById('applied').checked ? true : false;
+        const status = document.getElementById('status');
+        formData.status = status.options[status.selectedIndex].value;
+        console.log(formData.status);
+        const favRating = document.getElementById('favRating');
+        formData.favRating = favRating.options[favRating.selectedIndex].value;
+        console.log(formData.favRating);
         formData.description = document.getElementById('description').value;
         return formData;
     }
@@ -59,10 +63,21 @@ const AddOfferForm = (props) => {
                     <input type="text" id="field" name="field" />
                     <label htmlFor="paygrade">Paygrade:</label>
                     <input type="text" id="paygrade" name="paygrade"  />
-                    <label htmlFor="favorite">Favorite:</label>
-                    <input type="checkbox" id="favorite" name="favorite" />
-                    <label htmlFor="applied">Applied:</label>
-                    <input type="checkbox" id="applied" name="applied" />
+                    <label htmlFor="favRating">Rate offer:</label>
+                    <select id="favRating" name="favRating">
+                        <option value="1" name="1" selected>1</option>
+                        <option value="2" name="2">2</option>
+                        <option value="3" name="3">3</option>
+                        <option value="4" name="4">4</option>
+                        <option value="5" name="5">5</option>
+                    </select>
+                    <label htmlFor="status">Status:</label>
+                    <select id="status" name="status">
+                        <option value="none" name="none">none</option>
+                        <option value="applied" name="applied">applied</option>
+                        <option value="rejected" name="rejected">rejected</option>
+                        <option value="succeded" name="succeded">succeded</option>
+                    </select>
                     <label htmlFor="description">Description:</label>
                     <textarea id="description" name="description" rows="10" cols="30"></textarea>
                     <button type="submit">Add Offer</button>

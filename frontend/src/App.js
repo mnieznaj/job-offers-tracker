@@ -1,28 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, useRouteMatch, NavLink, Link, useParams } from 'react-router-dom';
+import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
 
 import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard';
-import AddOfferForm from './Components/Dashboard/AddOfferForm/AddOfferForm';
-import EditOfferForm from './Components/Dashboard/EditOfferForm/EditOfferForm';
+import AddOfferForm from './Components/Dashboard/Forms/AddOfferForm/AddOfferForm';
+import EditOfferForm from './Components/Dashboard/Forms/EditOfferForm/EditOfferForm';
 import Nav from './Components/Dashboard/Nav/Nav';
 import Profile from './Components/Dashboard/Profile/Profile';
 
 const App = (props) => {
-
-
-  // useEffect((props) => {
-  //   fetch('/get-offer-list')
-  //       .then(response => response.json())
-  //       .then(data => {
-  //           console.log("data from app.js fetch" + data);
-  //           props.setOffersList(data);
-  //           // props.offersList = data;
-  //           // offers = data;
-  //       })
-  //       .catch(err => console.log(err));
-  // },[]);
 
     let form;
     if(props.displayAddOffer){
@@ -33,24 +20,23 @@ const App = (props) => {
       form = null;
     }
 
-    let { path, url } = useRouteMatch();
-    console.log("Path: " + path + ". url: " + url);
+    let { path } = useRouteMatch();
 
     return (
       <div className="App">
-        
+        {!localStorage.getItem('token') ? <Redirect to="/"/> : null}
         {form}
-        <div style={{display : "flex", flexDirection : "column"}}>
-          <Nav />
+        <Nav />
+        <div className="container" style={{display : "flex", flexDirection : "column"}}>
             <Switch>
                 <Route path={`${path}/profile`} component={Profile} />
                 <Route path={`${path}/dashboard`} component={Dashboard} />
-                <Route path={`${path}`} component={Dashboard} />
+                <Route path={`${path}`} exact component={Dashboard} />
+                {/* <Route path={`${path}`} component={Dashboard} /> Do the redirect to 404 */}
             </Switch>
         </div>
       </div>
     );
-  // }
 }
 
 const mapStateToProps = state => {

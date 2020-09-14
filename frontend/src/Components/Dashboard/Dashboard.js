@@ -9,8 +9,8 @@ const Dashboard = (props) => {
     
   return (
     <div className="dashboard">
-      <h2>Dashboard</h2>
-      <button onClick={() => props.displayAddOffer(true)}>Add new offer</button>
+      <h2 className="dashboard__title">Dashboard</h2>
+      {/* <button onClick={() => props.displayAddOffer(true)}>Add new offer</button> */}
       <OffersList />
     </div>
   );

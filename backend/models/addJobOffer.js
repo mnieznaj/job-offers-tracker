@@ -43,12 +43,8 @@ const addJobOfferSchema = new Schema({
         required: false,
         trim: true
     },
-    favorite: {
-        type: Boolean,
-        required: false
-    },
-    applied: {
-        type: Boolean,
+    favRating: {
+        type: Number,
         required: false
     },
     description: {
@@ -56,22 +52,10 @@ const addJobOfferSchema = new Schema({
         required: false,
         trim: true
     },
-    stage1: {
-        type: Boolean,
+    status: {
+        type: String,
         required: false
-    },
-    stage2: {
-        type: Boolean,
-        required: false
-    },
-    stage3: {
-        type: Boolean,
-        required: false
-    },
-    gotTheJob: {
-        type: Boolean,
-        required: false
-    },
+    }
 }, {timestamps: true, collection: 'list-of-offers'});
 
 // module, 1 arg is name, second is type of schema

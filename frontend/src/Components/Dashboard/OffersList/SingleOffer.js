@@ -1,9 +1,13 @@
 import React from 'react';
+import Dropdown from '../Forms/Dropdown/Dropdown';
 
 import { connect } from 'react-redux';
 import { currentOfferId, displayUpdateOfferForm } from '../../../store/actions/dashboardActions';
-
 import { setAuthHeader } from "../../../utils/setAuthHeader"; 
+import './SingleOffer.css';
+import {ReactComponent as Heart} from "./heart-icon.svg";
+import {ReactComponent as FilledHeart} from "./filled-heart-icon.svg";
+import {ReactComponent as LinkIcon} from "./link-icon.svg";
 
 
 const SingleOffer = (props) => {
@@ -24,33 +28,52 @@ const SingleOffer = (props) => {
         .then(data => console.log(data))
         .catch(err => console.log(err));
     }
+    const renderHearts = () => {
+        let heartList = [];
+        for(let i = 0; i < 5; i++){
+            if(i < data.favRating){
+                heartList.push(<FilledHeart />)
+            }else{
+                heartList.push(<Heart />)
+            }
+        }
+        return heartList;
+    }
 
     return(
-        <tr id={data._id}>
-            <td>{data.title}</td>
-            <td><a href={data.link} rel="noopener noreferrer" target="_blank">Go to the offer</a></td>
-            <td>{data.company}</td>
-            <td>{data.country}</td>
-            <td>{data.city}</td>
-            <td>{data.field}</td>
-            <td>{data.paygrade}</td>
-            <td>{data.favorite ? "true" : "false"}</td>
-            <td>{data.applied ? "true" : "false"}</td>
-            <td>{data.description}</td>
-            <td>{data.stage1 ? "true" : "false"}</td>
-            <td>{data.stage2 ? "true" : "false"}</td>
-            <td>{data.gotTheJob ? "true" : "false"}</td>
-            <td onClick={deleteOfferHandler}>x</td>
-            <td onClick={() => {
-                // props.offerFormHandler("edit");
-                // alert("click edit");
-                // props.setFormType("edit");
-                // alert("click id");
-                props.showUpdateOffer(true, data._id)
-                console.log("click id: "+ data._id);
-                props.setOfferId(data._id)
-                }}>edit</td>
-        </tr>
+        <li className="offer-list_item">
+            <div id={data._id} className="offer">
+                <div className="offer-header">
+                    <button className="offer-header__button" onClick={() => {
+                        props.showUpdateOffer(true, data._id);
+                        props.setOfferId(data._id)
+                    }}>Edit</button>
+                    <button className="offer-header__button" onClick={deleteOfferHandler}>X</button>
+                </div>
+                <div className="offer-body">
+                    <span className="offer-body__header-section">
+                        <h2 className="offer-body__header-section--title">{data.title}</h2>
+                        <span className="offer-body__header-section--rating">
+                            {renderHearts()}
+                        </span>
+                        <Dropdown title={data.status} clss="offer-body__header-section--status"/>
+                    </span>
+                    <span className="offer-body__section-wrap">
+                        <span className="offer-body__location-section">
+                            <h3 className="offer-body__location-section--company">{data.company}</h3>
+                            <p className="offer-body__location-section--paygrade">{data.paygrade}</p>
+                            <p className="offer-body__location-section--location">{`${data.country}, ${data.city}`}</p>
+                        </span>
+                        <span className="offer-body__link-section">
+                            <a href={data.link} rel="noopener noreferrer" target="_blank"><LinkIcon /> Link</a>
+                        </span>
+                    </span>
+                    <span className="offer-body__description-section">
+                        <p className="offer-body__description-section--description">{data.description}</p>
+                    </span>
+                </div>
+            </div>
+        </li>
     )
 }
 
