@@ -46,3 +46,15 @@ export const setOffersFilter = (filter) => {
         filter: filter
     }
 }
+export const setUserId = id => {
+    return {
+        type: actionTypes.SET_USER_ID,
+        id: id
+    }
+}
+export const setDbId = id => {
+    return {
+        type: actionTypes.SET_DB_ID,
+        id: id
+    }
+}

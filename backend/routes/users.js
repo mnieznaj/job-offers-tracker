@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 
 const User = require('../models/User');
+const AddJobOffer = require("../models/addJobOffer");
 
 router.post('/register-user', (req, res) => {
     const {name, email, password, repeatPassword} = req.body;
@@ -49,12 +50,21 @@ router.post('/register-user', (req, res) => {
                         name,
                         email,
                         password
-                    })
+                    });
                 }
+                        const offerDb = new AddJobOffer({
+                            userId: newUser._id,
+                            offers: []
+                        });
+                        offerDb.save();
+                        newUser.dbId = offerDb._id;
+                        console.log(newUser);
+                        // newUser.save();
 
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
+                        // offerDb.save();
                         newUser.password = hash;
                         newUser.save().
                             then(user => {
@@ -81,7 +91,9 @@ router.post('/login-user', (req, res, next) => {
            }
            // generate a signed json web token with the contents of user object and return it in the response
             const token = jwt.sign(user.toJSON(), 'your_jwt_secret', {expiresIn: "7d"});
-           return res.json({token});
+            const userId = user._id;
+            const dbId = user.dbId;
+           return res.json({token,userId,dbId});
         });
         console.log("Check for response being send")
     })(req, res);

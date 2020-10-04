@@ -1,8 +1,9 @@
 import React from 'react';
 import './Login.css';
+import '../Dashboard/Forms/Form.css'
 
 import { connect } from 'react-redux';
-import { setUserToken } from '../../store/actions/dashboardActions';
+import { setUserToken, setDbId, setUserId } from '../../store/actions/dashboardActions';
 
 const Login = (props) => {
     const login = (event) => {
@@ -24,13 +25,19 @@ const Login = (props) => {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             props.setToken(data.token);
+            props.setUserId(data.userId);
+            props.setDbId(data.dbId);
             return data
         })
         .then(data => {
             if(!localStorage.getItem("token") || localStorage.getItem("token") === undefined){
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("userId", data.userId);
+                localStorage.setItem("dbId", data.dbId);
             }
+            
             window.location.href = window.location + "app";
             return data
         })
@@ -38,22 +45,24 @@ const Login = (props) => {
     }
     return(
         <div className="login">
-            <h2>Login</h2>
-            <form className="login-form">
-                <label>Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter Email"></input>
-                <label>Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password"></input>
-                <button type="Submit" onClick={(event) => login(event)}>Login</button>
+            <form className="form">
+                <h2>Login</h2>
+                <label className="form-label">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" className="form-input"></input>
+                <label className="form-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" className="form-input"></input>
+                <button type="Submit" onClick={(event) => login(event)}className="form-button">Login</button>
             </form>
-            <p>Don't have an acount? <a href="/#">Register Now!</a></p>
+            <p>You do not have an acount? <a onClick={() => props.changeForm("register")}>Register Now!</a></p>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setToken: (token) => dispatch(setUserToken(token))
+        setToken: (token) => dispatch(setUserToken(token)),
+        setUserId: (id) => dispatch(setUserId(id)),
+        setDbId: (id) => dispatch(setDbId(id))
     }
 }
 

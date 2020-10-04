@@ -15,11 +15,6 @@ import './Nav.css';
 const Nav = (props) => {
     let { url } = useRouteMatch();
 
-    const logout = () => {
-        localStorage.removeItem("token");
-        window.location.reload();
-    }
-
     return(
         <nav className="nav-bar">
             <Link to={`${url}`}><Logo /></Link>
@@ -33,7 +28,6 @@ const Nav = (props) => {
                 <NavLink className="nav-bar__list-item" to={`${url}/profile`}>
                     <ProfileIcon/>
                 </NavLink>
-                <button onClick={logout}>Logout</button>
             </ul>
         </nav>
     )

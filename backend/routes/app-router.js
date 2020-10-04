@@ -30,7 +30,7 @@ router.get("/get-offer-list", (req, res) => {
   
   
 router.post("/add-offer", (req, res) => {
-    const offer = new AddJobOffer(req.body); //not sure about json here
+    const offer = new AddJobOffer({offers: [req.body]}); //not sure about json here
     console.log(offer);
     if(!offer.favRating){
       offer.favRating = 0;

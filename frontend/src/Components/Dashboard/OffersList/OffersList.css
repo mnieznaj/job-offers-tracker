@@ -1,3 +1,7 @@
 .offers-list{
     max-width: 1200px;
 }
+.offers-list__button{
+    width: 200px;
+    margin: 15px 0;
+}

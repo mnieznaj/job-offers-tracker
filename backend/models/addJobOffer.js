@@ -8,54 +8,58 @@ const addJobOfferSchema = new Schema({
         type: String,
         required: true
     },
-    title: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    link: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    company: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    country: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    city: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    field: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    paygrade: {
-        type: String || Number,
-        required: false,
-        trim: true
-    },
-    favRating: {
-        type: Number,
-        required: false
-    },
-    description: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    status: {
-        type: String,
-        required: false
-    }
+    offers: [
+        {
+            title: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            link: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            company: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            country: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            city: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            field: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            paygrade: {
+                type: String || Number,
+                required: false,
+                trim: true
+            },
+            favRating: {
+                type: Number,
+                required: false
+            },
+            description: {
+                type: String,
+                required: false,
+                trim: true
+            },
+            status: {
+                type: String,
+                required: false
+            }
+        }
+    ]
 }, {timestamps: true, collection: 'list-of-offers'});
 
 // module, 1 arg is name, second is type of schema

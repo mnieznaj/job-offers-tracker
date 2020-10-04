@@ -1,13 +1,14 @@
 import React from 'react';
 import './Register.css';
+import '../Dashboard/Forms/Form.css'
 
-const Register = () => {
+const Register = (props) => {
     const register = (event) => {
         event.preventDefault();
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        const repeatPassword = document.getElementById("repeat-password").value;
+        const name = document.getElementById("reg-name").value;
+        const email = document.getElementById("reg-email").value;
+        const password = document.getElementById("reg-password").value;
+        const repeatPassword = document.getElementById("repeat-reg-password").value;
         
         if(password === repeatPassword){
             const data = {
@@ -33,19 +34,19 @@ const Register = () => {
     }
     return(
         <div className="register">
-            <h2>Register</h2>
-            <form className="register-form">
-                <label>Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter Name" required></input>
-                <label>Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter Email" required></input>
-                <label>Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password" required></input>
-                <label>Repeat Password</label>
-                <input type="password" id="repeat-password" name="repeat-password" placeholder="Repeat Password" required></input>
-                <button type="submit" onClick={(event) => register(event)}>Register</button>
+            <form className="form">
+                <h2>Register</h2>
+                <label className="form-label">Name</label>
+                <input type="text" id="reg-name" name="reg-name" placeholder="Enter Name" className="form-input" required></input>
+                <label className="form-label">Email</label>
+                <input type="email" id="reg-email" name="reg-email" placeholder="Enter Email" className="form-input" required></input>
+                <label className="form-label">Password</label>
+                <input type="password" id="reg-password" name="reg-password" placeholder="Enter Password" className="form-input" required></input>
+                <label className="form-label">Repeat Password</label>
+                <input type="password" id="repeat-reg-password" name="repeat-reg-password" placeholder="Repeat Password" className="form-input" required></input>
+                <button type="submit" onClick={(event) => register(event)} className="form-button">Register</button>
             </form>
-            <p>Already have an acount? <a href="/#">Log in!</a></p>
+            <p>Already have an acount? <a onClick={() => props.setForm("login")}>Log in!</a></p>
         </div>
     )
 }

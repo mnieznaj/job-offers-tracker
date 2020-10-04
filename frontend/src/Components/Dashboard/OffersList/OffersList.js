@@ -72,7 +72,7 @@ class OffersList extends Component {
         return (
             list.length === 0 ? (
                 <React.Fragment>
-                    <button onClick={this.fetchOffers}>Pobierz oferty</button>
+                    <button onClick={this.fetchOffers} className="offers-list__button">Pobierz oferty</button>
                     <p>No offers.</p>
                 </React.Fragment>
             ) : (

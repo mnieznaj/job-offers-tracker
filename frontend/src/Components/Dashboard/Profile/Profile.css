@@ -1,3 +1,37 @@
-h2{
-    color: black
+.profile{
+    display: block;
+    width: 100%;
+    margin: 15px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+.profile-title{
+    font-family: 'Bree Serif', serif;
+    font-size: 44px;
+    margin-bottom: 15px;
+}
+.profile__form{
+    display:flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+.profile__form-label{
+    margin: 10px 0;
+}
+.profile__form-input{
+    height: 25px;
+    border: 1px solid #2E365C;
+    border-radius: 8px;
+    width: 300px;
+}
+.profile__form-button{
+    width: 150px;
+    margin-top: 20px;
+}
+
+@media (min-width: 1000px){
+    .profile{
+        width: 940px;
+    }
 }

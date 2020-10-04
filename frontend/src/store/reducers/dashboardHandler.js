@@ -4,7 +4,8 @@ const initialState = {
     offersList: [],
     displayAddOffer: false,
     displayUpdateOffer: false,
-    // userId: "5f4e08c7d2ef258e7d34b2de",
+    userId: null,
+    dbId: null,
     userToken: localStorage.getItem("token") ? localStorage.getItem("token") : null,
     currentOfferId: null,
     offersFilter: null
@@ -47,6 +48,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 offersFilter: action.filter
+            }
+        case actionTypes.SET_USER_ID:
+            return {
+                ...state,
+                userId: action.id
+            }
+        case actionTypes.SET_DB_ID:
+            return {
+                ...state,
+                dbId: action.id
             }
         // default:
         //     return state

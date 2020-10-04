@@ -20,6 +20,9 @@ const User = new Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    dbId: {
+        type: String
     }
 }, {timestamps: true, collection: 'list-of-users'});
 
