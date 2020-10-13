@@ -30,11 +30,12 @@ router.get("/get-offer-list", (req, res) => {
   
   
 router.post("/add-offer", (req, res) => {
-    const offer = new AddJobOffer({offers: [req.body]}); //not sure about json here
-    console.log(offer);
+    const offer = new AddJobOffer(req.body); //not sure about json here
+    console.log("pierwszy komunikat z dodania oferty" + offer);
     if(!offer.favRating){
       offer.favRating = 0;
     }
+    console.log("drugi komunikat z dodania oferty" + offer);
     if(!((offer.status === "none") || (offer.status === 'applied') || (offer.status === "rejected") || (offer.status === "succeded"))){
       return res.json({msg: "wrong status set for offer"});
     } else {

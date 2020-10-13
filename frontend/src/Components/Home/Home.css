@@ -8,8 +8,8 @@
 
 .lp-info{
     width: 50%;
-    height: 100%; 
-    padding: 100px;
+    min-height: 700px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,25 +20,40 @@
     font-family: 'Bree Serif', serif;
     font-size: 44px;
     margin-bottom: 15px;
+    display: none;
 }
 .lp-goto-forms{
     display: none;
 }
+.lp-info__animation{
+    display: block;
+    max-height: 450px;
+}
 .lp-info__p{
     font-family: 'Bree Serif', serif;
     font-size: 44px;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
     text-align: center;
 }
 
 .lp-user-handler{
     width: 50%;
-    height: 100%;
-    padding: 100px;
+    min-height: 700px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.lp-user-handler__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lp-user-handler__logo{
+    min-height: 150px;
+    margin-bottom: 40px;
 }
 
 @media (max-width: 1000px){

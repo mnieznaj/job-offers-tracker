@@ -24,6 +24,8 @@
 
 .offer-header__button{
     display: block;
+    margin-left: 24px;
+    padding: 0px;
     width: 33px;
     height: 33px;
     background-color: #ffffff;
@@ -71,6 +73,7 @@
     flex-direction: column;
     width: 100%;
     grid-area: location;
+    text-align: end;
 }
 .offer-body__location-section > * {
     margin-bottom: 10px;
@@ -96,6 +99,7 @@
     grid-area: link;
     margin-bottom: 10px;
     font-size: 24px;
+    text-align: end;
 }
 
 .offer-body__description-section{
@@ -107,15 +111,19 @@
 .offer-body__description-section--description{
     text-align: left;
 }
+.filtered{
+    display: none;
+}
 
 @media (min-width: 1000px){
     .offer-body{
         width: 100%;
+        padding: 0 82px 82px 82px;
         display: grid;
         grid-template-areas:"header section-wrap"
                             "desc section-wrap";
         grid-template-rows: auto 1fr;
-        grid-template-columns: 70% 300px;
+        grid-template-columns: 70% 30%;
     }
 
     .offer-body__link-section{

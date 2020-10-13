@@ -7,33 +7,35 @@ import { setOffersList } from '../../../store/actions/dashboardActions';
 import { setAuthHeader } from '../../../utils/setAuthHeader';
 import SearchBar from '../SearchBar/SearchBar';
 
-// class OffersList extends Component {
-    // state = {offers:[]};
 class OffersList extends Component {
     constructor(props){
         super(props);
         this.state = {
             offers: [],
-            sortCategory: null
+            sortCategory: this.props.offersFilter
         };
-        this.fetchOffers = () => {
-            const token= localStorage.getItem("token");
-            fetch('/app/get-offer-list', {
-                method: "GET",
-                headers: setAuthHeader(token)})
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    this.setState({offers: data});
-                })
-                .catch(err => console.log(err));
-        }
     }
-    // Dac oferty do stanu (może nawet stanu reduxa), jak będa w stanie to można je sortować
-    // rodzaj posortowania można by zachowywać w stanie
+    fetchOffers = () => {
+        const token= localStorage.getItem("token");
+        fetch('/app/get-offer-list', {
+            method: "GET",
+            headers: setAuthHeader(token)})
+            .then(response => response.json())
+            .then(data => {
+                console.log("data w fetchu:" + data);
+                this.setState({offers: data});
+                this.props.setOffersList(data);
+                return data
+            })
+            // .then(data => {
+            //         this.setState({offers: this.props.offersList});
+            //     })
+            .catch(err => console.log(err));
+    }
+
     sortByCategoryAsc(cat){
-        if(cat === "city" || cat === "country" || cat === "title" || cat === "createdAt" || cat === "expires" || cat === "status" || cat === "paygrade"){
-            const sortedOffers = [...this.state.offers.data];
+        if(cat === "title" || cat === "createdAt" || cat === "status" || cat === "paygrade"){
+            const sortedOffers = [...this.state.offers];
             sortedOffers.sort((a,b) => {
                 if(a.cat < b.cat){
                     return -1;
@@ -45,28 +47,35 @@ class OffersList extends Component {
             })
             this.setState({offers: sortedOffers})
         }
-    }
-    sortByCategoryDesc(cat){
-        if(cat === "city" || cat === "country" || cat === "title" || cat === "createdAt" || cat === "expires" || cat === "status" || cat === "paygrade"){
-            const sortedOffers = [...this.state.offers.data];
-            sortedOffers.sort((a,b) => {
-                if(a.cat < b.cat){
-                    return 1;
-                }else if (a.cat > b.cat){
-                    return -1;
-                }else{
-                    return 0;
-                }
-            })
-            this.setState({offers: sortedOffers})
-        }
-    } //can make it more reusable function with input being a field to sort by
+    } //może zmieniać w css order?
+
+    // sortByCategoryDesc(cat){
+    //     if(cat === "city" || cat === "country" || cat === "title" || cat === "createdAt" || cat === "expires" || cat === "status" || cat === "paygrade"){
+    //         const sortedOffers = [...this.state.offers.data];
+    //         sortedOffers.sort((a,b) => {
+    //             if(a.cat < b.cat){
+    //                 return 1;
+    //             }else if (a.cat > b.cat){
+    //                 return -1;
+    //             }else{
+    //                 return 0;
+    //             }
+    //         })
+    //         this.setState({offers: sortedOffers})
+    //     }
+    // }
     
     componentDidMount(){
-        this.fetchOffers()
+        console.log(this.state.sortCategory);
     };
-
+    
     render(){
+        console.log("Stan lista ofert: " + this.state.offersList);
+        if(this.state.offersList === [] || this.state.offersList === undefined){
+            // this.fetchOffers();
+            console.log("Stan listy ofert po fetchu: " + this.state.offersList);
+        }
+            this.sortByCategoryAsc(this.state.sortCategory);
 
         const list = this.state.offers.map(offer => <SingleOffer offer={offer} key={offer._id} />);
         return (
@@ -77,7 +86,6 @@ class OffersList extends Component {
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    {/* <button onClick={this.fetchOffers}>Pobierz oferty</button> */}
                     <SearchBar />
                     <ul className="offers-list">
                         {list}
@@ -90,7 +98,8 @@ class OffersList extends Component {
 
 const mapStateToProps = state => {
     return {
-        offersList: state.offersList
+        offersList: state.offersList,
+        sortingFilter: state.offersFilter
     }
 }
 const mapDispatchToProps = dispatch => {

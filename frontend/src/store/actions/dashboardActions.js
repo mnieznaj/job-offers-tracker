@@ -7,21 +7,6 @@ export const currentOfferId = (id) => {
     }
 }
 
-export const displayAddOfferForm = (display) => {
-    return {
-        type: actionTypes.ADD_OFFER,
-        display: display
-    }
-}
-
-export const displayUpdateOfferForm = (display, id) => {
-    return {
-        type: actionTypes.UPDATE_OFFER,
-        display: display,
-        id: id
-    }
-}
-
 export const setOffersList = (offers) => {
     return {
         type: actionTypes.SET_OFFERS_LIST,

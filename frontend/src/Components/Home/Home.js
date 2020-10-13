@@ -7,31 +7,35 @@ import './Home.css';
 import homeGif from "./home.gif";
 
 class Home extends Component {
-    state = {
-        form: "none"
+    constructor(){
+        super();
+        this.state = {
+            form: "none"
+        };
+        this.setForm = this.setForm.bind(this);
     }
 
     setForm(formState){
-        this.setState(
-            {form: formState}
-        );
+        this.setState({
+            form: formState
+        });
         console.log(this.state.form)
     }
     render(){
         const homeHandler = (
-            <React.Fragment>
-            <h1 className="lp-info__title">Jot</h1>
-            <img src="/icons/jot-logo.svg" alt="jot logo"/>
-            <p className="lp-info__p">Jot them down in one place!</p>
-            <button onClick={() => this.setForm("login")}>Login</button>
-            <button onClick={() => this.setForm("register")}>Register</button>
-        </React.Fragment>
+            <div className="lp-user-handler__container">
+                <h1 className="lp-info__title">Jot</h1>
+                <img className="lp-user-handler__logo" src="/icons/jot-logo.svg" alt="jot logo"/>
+                <p className="lp-info__p">them down in one place!</p>
+                <button onClick={() => this.setForm("login")}>Login</button>
+                <button onClick={() => this.setForm("register")}>Register</button>
+            </div>
         );
         return (
             <div className="landing-page">
                 {localStorage.getItem('token') ? <Redirect to="/app/"/> : null}
                 <div className="lp-info">
-                    <img src={homeGif} alt="animation"/>
+                    <img className="lp-info__animation" src={homeGif} alt="animation"/>
                     <p className="lp-info__p">Can't keep track of<br/> all job offers you<br/> applied to?</p>
                     <a href="#landingpage-forms" className="lp-goto-forms">V</a>
                 </div>
@@ -42,11 +46,5 @@ class Home extends Component {
         )
     }
 }
-
-// const HomeHandler = (props) => {
-//     return(
-        
-//     )
-// }
 
 export default Home;

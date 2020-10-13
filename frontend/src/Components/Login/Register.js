@@ -35,18 +35,19 @@ const Register = (props) => {
     return(
         <div className="register">
             <form className="form">
-                <h2>Register</h2>
+                <h2 className="form-title">Register</h2>
                 <label className="form-label">Name</label>
-                <input type="text" id="reg-name" name="reg-name" placeholder="Enter Name" className="form-input" required></input>
-                <label className="form-label">Email</label>
-                <input type="email" id="reg-email" name="reg-email" placeholder="Enter Email" className="form-input" required></input>
+                <input type="text" id="reg-name" name="reg-name" placeholder="Enter Name" className="form-input form-homepage-input" required></input>
+                <label className="form-label">E-mail</label>
+                <input type="email" id="reg-email" name="reg-email" placeholder="Enter Email" className="form-input form-homepage-input" required></input>
                 <label className="form-label">Password</label>
-                <input type="password" id="reg-password" name="reg-password" placeholder="Enter Password" className="form-input" required></input>
+                <input type="password" id="reg-password" name="reg-password" placeholder="Enter Password" className="form-input form-homepage-input" required></input>
                 <label className="form-label">Repeat Password</label>
-                <input type="password" id="repeat-reg-password" name="repeat-reg-password" placeholder="Repeat Password" className="form-input" required></input>
+                <input type="password" id="repeat-reg-password" name="repeat-reg-password" placeholder="Repeat Password" className="form-input form-homepage-input" required></input>
+                <p className="form-error-msg">Incorrect</p>
                 <button type="submit" onClick={(event) => register(event)} className="form-button">Register</button>
             </form>
-            <p>Already have an acount? <a onClick={() => props.setForm("login")}>Log in!</a></p>
+            <p className="form-paragraph">Already have an acount?<br/><span className="switch-homescreen" onClick={() => props.changeForm("login")}>Log in!</span></p>
         </div>
     )
 }

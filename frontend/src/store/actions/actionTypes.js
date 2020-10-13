@@ -1,6 +1,4 @@
 export const SET_OFFERS_LIST = "SET_OFFERS_LIST";
-export const ADD_OFFER = "ADD_OFFER";
-export const UPDATE_OFFER = "UPDATE_OFFER";
 
 export const CURRENT_OFFER_ID = "CURRENT_OFFER_ID";
 

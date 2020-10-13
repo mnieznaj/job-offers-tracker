@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link, NavLink, useRouteMatch } from 'react-router-dom';
 
-import { connect } from 'react-redux';
-import { displayAddOfferForm } from '../../../store/actions/dashboardActions';
-
 import { ReactComponent as Logo } from './icons/jot-logo.svg';
 import { ReactComponent as AddIcon } from './icons/plus-icon.svg';
 import { ReactComponent as ProfileIcon } from './icons/profile-icon.svg';
@@ -11,31 +8,27 @@ import { ReactComponent as SearchIcon } from './icons/search-icon.svg';
 
 import './Nav.css';
 
-
-const Nav = (props) => {
+const Nav = () => {
     let { url } = useRouteMatch();
 
     return(
         <nav className="nav-bar">
-            <Link to={`${url}`}><Logo /></Link>
-            <ul className="nav-bar__list">
-                <NavLink className="nav-bar__list-item" to={`${url}`} onClick={() => props.displayAddOffer(true)}>
-                    <AddIcon/>
-                </NavLink>
-                <NavLink className="nav-bar__list-item" to={`${url}/dashboard`}>
-                    <SearchIcon/>
-                </NavLink>
-                <NavLink className="nav-bar__list-item" to={`${url}/profile`}>
-                    <ProfileIcon/>
-                </NavLink>
-            </ul>
+            <span className="nav-bar-width">
+                <Link to={`${url}`}><Logo /></Link>
+                <ul className="nav-bar__list">
+                    <NavLink className="nav-bar__list-link" activeStyle={{color:"#131C48"}} to={`${url}/add`} /*onClick={() => props.displayAddOffer(true)}*/>
+                        <li className="nav-bar__list-item"><AddIcon/> <span>add</span></li>
+                    </NavLink>
+                    <NavLink className="nav-bar__list-link" activeStyle={{color:"#131C48"}} to={`${url}/dashboard`}>
+                        <li className="nav-bar__list-item"><SearchIcon/> <span>search</span></li>
+                    </NavLink>
+                    <NavLink className="nav-bar__list-link" activeStyle={{color:"#131C48"}} to={`${url}/profile`}>
+                        <li className="nav-bar__list-item"><ProfileIcon/> <span>profile</span></li>
+                    </NavLink>
+                </ul>
+            </span>
         </nav>
     )
 }
-const mapDispatchToProps = dispatch => {
-    return {
-        displayAddOffer: (show) => dispatch(displayAddOfferForm(show))
-    }
-}
 
-export default connect(null, mapDispatchToProps)(Nav);
+export default Nav;

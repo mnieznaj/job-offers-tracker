@@ -26,21 +26,21 @@ class FilterDropdown extends React.Component {
                     <div className="filter-dropdown__header-title" >
                         <span className="filter-dropdown__header-title-text">
                             sort
-                            <button className="filter-dropdown__header-title-button" type="button"><Arrow /></button>
+                            <button className={"filter-dropdown__header-title-btn " + (this.state.listOpen ? "filter-dropdown__header-title-btn--rotate": "")} type="button"><Arrow /></button>
                         </span>
                     </div>
                 </div>
-                <ul className={"filter-dropdown__list " + (this.state.listOpen ? null : "hide-element")}>
-                    <li className="filter-dropdown__list-item">
-                        Alphabetically
+                <ul className={"filter-dropdown__list " + (this.state.listOpen ? "" : "hide-element")}>
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("title"); this.toggleList()}}>
+                        Title
                     </li>
-                    <li className="filter-dropdown__list-item">
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("createdAt"); this.toggleList()}}>
                         Date
                     </li>
-                    <li className="filter-dropdown__list-item">
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("paygrade"); this.toggleList()}}>
                         Paygrade
                     </li>
-                    <li className="filter-dropdown__list-item">
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("status"); this.toggleList()}}>
                         Status
                     </li>
                 </ul>
@@ -52,7 +52,7 @@ class FilterDropdown extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setFilter: filter => setOffersFilter(filter)
+        setFilter: filter => dispatch(setOffersFilter(filter))
     }
 }
 

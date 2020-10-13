@@ -1,8 +1,11 @@
 import React from 'react';
 import Dropdown from '../Forms/Dropdown/Dropdown';
+import editIcon from './edit-icon.svg';
+import closeIcon from './close-icon.svg'
 
+import { Link, useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { currentOfferId, displayUpdateOfferForm } from '../../../store/actions/dashboardActions';
+import { currentOfferId } from '../../../store/actions/dashboardActions';
 import { setAuthHeader } from "../../../utils/setAuthHeader"; 
 import './SingleOffer.css';
 import {ReactComponent as Heart} from "./heart-icon.svg";
@@ -12,6 +15,7 @@ import {ReactComponent as LinkIcon} from "./link-icon.svg";
 
 const SingleOffer = (props) => {
     const data = props.offer;
+    let { url } = useRouteMatch();
 
     const deleteOfferHandler = () => {
         const id = data._id;
@@ -28,10 +32,11 @@ const SingleOffer = (props) => {
         .then(data => console.log(data))
         .catch(err => console.log(err));
     }
-    const renderHearts = () => {
+    
+    const renderHearts = (heartsNo) => {
         let heartList = [];
         for(let i = 0; i < 5; i++){
-            if(i < data.favRating){
+            if(i < heartsNo){
                 heartList.push(<FilledHeart />)
             }else{
                 heartList.push(<Heart />)
@@ -44,17 +49,18 @@ const SingleOffer = (props) => {
         <li className="offer-list_item">
             <div id={data._id} className="offer">
                 <div className="offer-header">
-                    <button className="offer-header__button" onClick={() => {
-                        props.showUpdateOffer(true, data._id);
+                    <Link to={`${url}/edit-offer`}><button className="offer-header__button" onClick={() => {
                         props.setOfferId(data._id)
-                    }}>Edit</button>
-                    <button className="offer-header__button" onClick={deleteOfferHandler}>X</button>
+                    }}>
+                        <img src={editIcon} alt="edit icon"/>
+                    </button></Link>
+                    <button className="offer-header__button" onClick={deleteOfferHandler}><img src={closeIcon} alt="close icon" /></button>
                 </div>
                 <div className="offer-body">
                     <span className="offer-body__header-section">
                         <h2 className="offer-body__header-section--title">{data.title}</h2>
                         <span className="offer-body__header-section--rating">
-                            {renderHearts()}
+                            {renderHearts(data.favRating)}
                         </span>
                         <Dropdown title={data.status} clss="offer-body__header-section--status"/>
                     </span>
@@ -79,14 +85,12 @@ const SingleOffer = (props) => {
 
 const mapStateToProps = state => {
     return {
-        // formType: state.formType,
         currentOfferId: state.currentOfferId
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        setOfferId: (id) => dispatch(currentOfferId(id)),
-        showUpdateOffer: (show, id) => dispatch(displayUpdateOfferForm(show, id))
+        setOfferId: (id) => dispatch(currentOfferId(id))
     }
 }
 

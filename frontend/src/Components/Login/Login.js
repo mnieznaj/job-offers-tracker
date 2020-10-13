@@ -32,13 +32,15 @@ const Login = (props) => {
             return data
         })
         .then(data => {
-            if(!localStorage.getItem("token") || localStorage.getItem("token") === undefined){
+            if(data.token && (!localStorage.getItem("token") || localStorage.getItem("token") === undefined)){
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userId", data.userId);
                 localStorage.setItem("dbId", data.dbId);
-            }
-            
-            window.location.href = window.location + "app";
+                
+                window.location.href = window.location + "app";
+            } else {
+                document.getElementById("login-error-msg").textContent = "Incorrect credentials";
+            }  
             return data
         })
         .catch(err => console.log(err));
@@ -46,14 +48,15 @@ const Login = (props) => {
     return(
         <div className="login">
             <form className="form">
-                <h2>Login</h2>
-                <label className="form-label">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter Email" className="form-input"></input>
+                <h2 className="form-title">Login</h2>
+                <label className="form-label">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" className="form-input form-homepage-input"></input>
                 <label className="form-label">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password" className="form-input"></input>
+                <input type="password" id="password" name="password" placeholder="Enter Password" className="form-input form-homepage-input"></input>
+                <p id="login-error-msg" className="form-error-msg"></p>
                 <button type="Submit" onClick={(event) => login(event)}className="form-button">Login</button>
             </form>
-            <p>You do not have an acount? <a onClick={() => props.changeForm("register")}>Register Now!</a></p>
+            <p className="form-paragraph">Don't have an acount?<br/><span className="switch-homescreen" onClick={() => props.changeForm("register")}>Register Now!</span></p>
         </div>
     )
 }

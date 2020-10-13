@@ -11,28 +11,32 @@ import Profile from './Components/Dashboard/Profile/Profile';
 
 const App = (props) => {
 
-    let form;
-    if(props.displayAddOffer){
-      form = <AddOfferForm />;
-    } else if (props.displayUpdateOffer){
-      form = <EditOfferForm />;
-    } else {
-      form = null;
-    }
+    // let form;
+    // if(props.displayAddOffer){
+    //   form = <AddOfferForm />;
+    // } else if (props.displayUpdateOffer){
+    //   form = <EditOfferForm />;
+    // } else {
+    //   form = null;
+    // }
 
     let { path } = useRouteMatch();
 
     return (
       <div className="App">
         {!localStorage.getItem('token') ? <Redirect to="/"/> : null}
-        {form}
+        {/* {form} */}
         <Nav />
         <div className="container" style={{display : "flex", flexDirection : "column"}}>
             <Switch>
                 <Route path={`${path}/profile`} component={Profile} />
+                <Route path={`${path}/dashboard/edit-offer`}>
+                  <EditOfferForm/>
+                </Route>
                 <Route path={`${path}/dashboard`} component={Dashboard} />
+                <Route path={`${path}/add`} component={AddOfferForm} />
                 <Route path={`${path}`} exact component={Dashboard} />
-                {/* <Route path={`${path}`} component={Dashboard} /> Do the redirect to 404 */}
+                {/* Do the redirect to 404 */}
             </Switch>
         </div>
       </div>
@@ -42,7 +46,8 @@ const App = (props) => {
 const mapStateToProps = state => {
   return {
       displayAddOffer: state.displayAddOffer,
-      displayUpdateOffer: state.displayUpdateOffer
+      displayUpdateOffer: state.displayUpdateOffer,
+      editOfferId: state.currentOfferId
   }
 }
 

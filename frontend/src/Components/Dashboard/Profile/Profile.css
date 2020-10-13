@@ -8,16 +8,49 @@
 }
 .profile-title{
     font-family: 'Bree Serif', serif;
-    font-size: 44px;
-    margin-bottom: 15px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    margin: 15px;
 }
 .profile__form{
     display:flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-top: 15px;
+    min-height: 437px;
+    max-height: 482px
+}
+.profile__section{
+    margin-bottom: 65px;
+}
+.profile__section:last-child{
+    margin-bottom: 20px;
 }
 .profile__form-label{
     margin: 10px 0;
+}
+.profile__info-text{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #D6D7DD;
+}
+.profile__edit-btn{
+    margin-top: 30px;
+    padding-top: 7px;
+    height: 44px;
+    width: 146px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+}
+.profile__edit-btn-link{
+    color: #ffffff;
+    text-decoration: none;
+    /* width: 146px;
+    height: 44px; */
 }
 .profile__form-input{
     height: 25px;

@@ -18,17 +18,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 offersList: action.offers
             };
-        case actionTypes.ADD_OFFER:
-            return {
-                ...state,
-                displayAddOffer: action.display
-            };
-        case actionTypes.UPDATE_OFFER:
-            return {
-                ...state,
-                displayUpdateOffer: action.display,
-                currentOfferId: action.id
-            };
         case actionTypes.CURRENT_OFFER_ID:
             return {
                 ...state,

@@ -1,4 +1,5 @@
 import React from 'react';
+import arrow from './arrow.svg';
 import './Dropdown.css';
 
 class Dropdown extends React.Component {
@@ -6,21 +7,15 @@ class Dropdown extends React.Component {
         super(props);
         this.state = {
           listOpen: false,
-          headerTitle: this.props.title,
+          headerTitle: "none",
           itemsList: [
-              "None",
-              "Appllied",
-              "Rejected",
-              "Succeded"
+              "none",
+              "applied",
+              "rejected",
+              "succeded"
           ]
         }
     }
-    handleClickOutside(){
-        this.setState({
-          listOpen: false
-        })
-    }
-      
     toggleList(){
         this.setState(prevState => ({
           listOpen: !prevState.listOpen
@@ -39,9 +34,10 @@ class Dropdown extends React.Component {
     setHeaderTitle(input){
         this.setState({
             headerTitle: input
-          })
-    } //dodać do apki
-    // dodać synchro z bazą danych
+        });
+        this.props.status(input);
+        this.toggleList();
+    }
 
     render(){
         return(
@@ -51,14 +47,13 @@ class Dropdown extends React.Component {
                         <span className="dropdown__header-title-text">
                             {this.state.headerTitle}
                         </span>
-                        <button className="dropdown__header-title-button"></button>
+                        <button className="dropdown__header-title-button" type="button">
+                            <img src={arrow} alt="arrow icon" className={this.state.listOpen ? "rotate-180" : ""}/>
+                        </button>
                     </div>
                 </div>
                 <ul className={"dropdown__list " + (this.state.listOpen ? null : "hide-element")}>
-                    <li className="dropdown__list-item">None</li>
-                    <li className="dropdown__list-item">Appllied</li>
-                    <li className="dropdown__list-item">Rejected</li>
-                    <li className="dropdown__list-item">Succeded</li>
+                    {this.setListItems()}
                 </ul>
             </div>
         )

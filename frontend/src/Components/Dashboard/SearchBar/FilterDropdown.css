@@ -1,5 +1,5 @@
 .filter-dropdown{
-    width: 300px;
+    width: 218px;
 }
 .filter-dropdown__header{
     border-radius: 8px;
@@ -7,6 +7,8 @@
     font-size: 22px;
 }
 .filter-dropdown__header-title{
+    height: 39px;
+
     display: flex;
     flex-direction: row;
     cursor: pointer;
@@ -18,19 +20,25 @@
     width: 100%;
     color: #585B67;
 }
-.filter-dropdown__header-title-button{
-    display: inline-block;
+.filter-dropdown__header-title-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
     height: 39px;
     width: 39px;
     background-color: #ffffff;
     color: #585B67;
     border: none;
 }
+.filter-dropdown__header-title-btn--rotate{
+    transform: rotate(180deg);
+}
 
 .filter-dropdown__list{
     display: block;
     position: absolute;
-    width: 300px;
+    width: 218px;
     list-style: none;
     background: #2E365C;
     color: #ffffff;

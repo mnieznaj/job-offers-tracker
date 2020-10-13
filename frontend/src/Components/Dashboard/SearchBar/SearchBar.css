@@ -12,9 +12,15 @@
     background: transparent;
     border: none;
     width: 100%;
+    font-size: 24px;
+    overflow-y: hidden;
 }
 .search-bar__sorter{
     width: 300px;
     color: #989898;
     background: #ffffff;
+}
+.search-bar__icon{
+    margin-left: 2px;
+    margin-right: 5px;
 }

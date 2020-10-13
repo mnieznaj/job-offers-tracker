@@ -1,0 +1,27 @@
+.heart-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px
+}
+.heart-icons > svg{
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
+
+@media screen and (min-width: 1000px){
+    .offer-form{
+        max-width: 1200px;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 72px 87px;
+    }
+    .offer-form__form{
+        width: 100%;
+        padding: 0;
+    }
+    
+}

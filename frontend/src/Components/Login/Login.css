@@ -2,3 +2,8 @@
     max-width: 300px;
     margin-bottom: 30px;
 }
+.switch-homescreen{
+    color: #76E1E8;
+    cursor: pointer;
+    text-decoration: underline;
+}

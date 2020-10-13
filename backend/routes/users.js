@@ -97,7 +97,11 @@ router.post('/login-user', (req, res, next) => {
         });
         console.log("Check for response being send")
     })(req, res);
-})
+});
+
+router.post('/change-password',() => {});
+router.post('/change-name',() => {});
+router.post('/change-mail',() => {});
 
 router.get('/logout-user', (req, res) => {
     req.logout();

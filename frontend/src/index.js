@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Home from './Components/Home/Home';
+import Done from './Components/Dashboard/Done/Done';
 import * as serviceWorker from './serviceWorker';
 
 // REDUX
@@ -23,6 +24,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        <Done />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/app" component={App} />

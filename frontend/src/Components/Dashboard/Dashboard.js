@@ -1,7 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
 import OffersList from './OffersList/OffersList';
-import { connect } from 'react-redux';
     
 const Dashboard = (props) => {
     
@@ -13,15 +12,4 @@ const Dashboard = (props) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    formType: state.formType,
-    userId: state.userId,
-    currentOfferId: state.currentOfferId,
-    displayAddOffer: state.displayAddOffer,
-    displayUpdateOffer: state.displayUpdateOffer,
-    offersList: state.offersList
-  }
-}
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;
