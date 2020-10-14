@@ -14,7 +14,7 @@ const Done = () => {
     return(
         <div id="done" className="done done--hide">
             <span className="done-content">
-                <img className={"done-animation"} src={doneAnimation} alt="done" loading="lazy"/>
+                <img className={"done-animation done-animation--visible"} src={doneAnimation} alt="done" loading="lazy"/>
                 {/* <span className="done-text">Done</span> */}
             </span>
         </div>

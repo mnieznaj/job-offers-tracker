@@ -22,7 +22,7 @@
     max-height: 482px
 }
 .profile__section{
-    margin-bottom: 65px;
+    margin-bottom: 20px;
 }
 .profile__section:last-child{
     margin-bottom: 20px;
@@ -75,5 +75,8 @@
 @media (min-width: 1000px){
     .profile{
         width: 940px;
+    }
+    .profile__section{
+        margin-bottom: 65px;
     }
 }

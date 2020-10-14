@@ -61,15 +61,11 @@ class EditOfferForm extends React.Component {
                 document.getElementById('title').value = formData.title;
                 document.getElementById('link').value = formData.link;
                 document.getElementById('company').value = formData.company;
-                // document.getElementById('country').value = formData.country;
                 this.setState({country: formData.country});
-                console.log("country set: " + this.state.country);
                 document.getElementById('city').value = formData.city;
                 document.getElementById('paygrade').value = formData.paygrade;
                 this.setState({currency: formData.currency});
-                // document.getElementById('status').selectedIndex = formData.status;
                 this.setStatus(formData.status);
-                // document.getElementById('favRating').selectedIndex = formData.favRating -1;
                 this.setRating(formData.favRating);
                 document.getElementById('description').value = formData.description;
             })
@@ -86,10 +82,6 @@ class EditOfferForm extends React.Component {
         formData.paygrade = document.getElementById('paygrade').value;
         formData.currency = this.state.currency;
         formData.status = this.state.status;
-        console.log("get form data status: " + formData.status);
-        // const favRating = document.getElementById('favRating');
-        // formData.favRating = favRating.options[favRating.selectedIndex].value;
-        console.log("get form data rating: " + formData.favRating);
         formData.favRating = this.state.hearts + 1;
         formData.description = document.getElementById('description').value;
         return formData;
@@ -155,30 +147,17 @@ class EditOfferForm extends React.Component {
                         <label htmlFor="company" className="form-label">Company</label>
                         <input type="text" id="company" name="company" className="form-input"/>
                         <label htmlFor="paygrade" className="form-label">Paygrade</label>
-                        <DropdownCurrency currency={this.setCurrency}/>
+                        <DropdownCurrency currency={this.setCurrency}>{this.state.currency}</DropdownCurrency>
                         <label htmlFor="country" className="form-label">Country</label>
-                        <DropdownCountry country={this.state.country} setCountry={this.setCountry}/>
+                        <DropdownCountry country={this.state.country} setCountry={this.setCountry}>{this.state.country}</DropdownCountry>
                         <label htmlFor="city" className="form-label">City</label>
                         <input type="text" id="city" name="city" required className="form-input"/>
                         <label htmlFor="favRating" className="form-label">Rating</label>
-                        {/* <select id="favRating" name="favRating" className="hide">
-                                <option value="1" name="1">1</option>
-                                <option value="2" name="2">2</option>
-                                <option value="3" name="3">3</option>
-                                <option value="4" name="4">4</option>
-                                <option value="5" name="5">5</option>
-                        </select> */}
                         <span className="heart-icons">
                             {this.renderHearts(this.state.hearts + 1)}
                         </span>
                         <label htmlFor="status" className="form-label">Status</label>
-                        {/* <select id="status" name="status" className="hide">
-                                <option value="none" name="none">none</option>
-                                <option value="applied" name="applied">applied</option>
-                                <option value="rejected" name="rejected">rejected</option>
-                                <option value="succeded" name="succeded">succeded</option>
-                        </select> */}
-                        <Dropdown title={this.state.status} status={this.setStatus}/>
+                        <Dropdown status={this.setStatus}>{this.state.status}</Dropdown>
                         <label htmlFor="description" className="form-label">Description</label>
                         <textarea id="description" name="description" rows="10" cols="30" className="form-description"></textarea>
                         <button type="submit" className="form-button">Save</button>

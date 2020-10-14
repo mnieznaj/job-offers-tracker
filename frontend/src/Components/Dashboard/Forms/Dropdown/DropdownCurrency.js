@@ -10,7 +10,6 @@ class Dropdown extends React.Component {
         this.state = {
           listOpen: false,
           headerTitle: 0,
-          activeCurrency: "",
           itemsList: Countries
         }
         this.setHeaderTitle = this.setHeaderTitle.bind(this)
@@ -28,9 +27,6 @@ class Dropdown extends React.Component {
         return list;
     }
     setActiveCurrency(input){
-        this.setState({
-            activeCurrency: input
-        });
         this.props.currency(input);
         this.toggleList();
     }
@@ -47,7 +43,7 @@ class Dropdown extends React.Component {
                     <div className="dropdown__header-title" >
                         <input id="paygrade" name="paygrade" className="dropdown__header-title-text currency-input" onChange={this.setHeaderTitle} placeholder="0"/>
                         <button className="dropdown__header-title-button currency-list-btn" type="button" onClick={()=> this.toggleList()}>
-                            {this.state.activeCurrency !== "" ? this.state.activeCurrency : <img src={arrow} alt=""/>}
+                            {this.props.children !== "" ? this.props.children : <img src={arrow} alt=""/>}
                         </button>
                     </div>
                 </div>

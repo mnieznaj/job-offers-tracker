@@ -7,7 +7,7 @@ class Dropdown extends React.Component {
         super(props);
         this.state = {
           listOpen: false,
-          headerTitle: this.props.title,
+          headerTitle: this.props.children,
           itemsList: [
               "none",
               "applied",
@@ -32,9 +32,6 @@ class Dropdown extends React.Component {
         return list;
     }
     setHeaderTitle(input){
-        this.setState({
-            headerTitle: input
-        });
         this.props.status(input);
         this.toggleList();
     }
@@ -45,7 +42,7 @@ class Dropdown extends React.Component {
                 <div className="dropdown__header" onClick={()=> this.toggleList()}>
                     <div className="dropdown__header-title" >
                         <span className="dropdown__header-title-text">
-                            {this.state.headerTitle}
+                            {this.props.children}
                         </span>
                         <button className="dropdown__header-title-button" type="button">
                             <img src={arrow} alt="arrow icon" className={this.state.listOpen ? "rotate-180" : ""}/>

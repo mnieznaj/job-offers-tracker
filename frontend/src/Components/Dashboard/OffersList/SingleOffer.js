@@ -15,7 +15,6 @@ import {ReactComponent as LinkIcon} from "./link-icon.svg";
 
 const SingleOffer = (props) => {
     const data = props.offer;
-    console.log("offer data inside single offer: " + data.status);
     let { url } = useRouteMatch();
 
     const deleteOfferHandler = () => {
@@ -63,12 +62,12 @@ const SingleOffer = (props) => {
                         <span className="offer-body__header-section--rating heart-icons">
                             {renderHearts(data.favRating, data._id)}
                         </span>
-                        <Dropdown title={data.status} keyId={data._id} clss="offer-body__header-section--status"/>
+                        <Dropdown keyId={data._id} clss="offer-body__header-section--status">{data.status}</Dropdown>
                     </span>
                     <span className="offer-body__section-wrap">
                         <span className="offer-body__location-section">
                             <h3 className="offer-body__location-section--company">{data.company}</h3>
-                            <p className="offer-body__location-section--paygrade">{data.paygrade}</p>
+                            <p className="offer-body__location-section--paygrade">{data.paygrade} {data.currency}</p>
                             <p className="offer-body__location-section--location">{`${data.country}, ${data.city}`}</p>
                         </span>
                         <span className="offer-body__link-section">

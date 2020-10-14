@@ -68,6 +68,8 @@
     }
     .lp-goto-forms{
         display: block;
+        height: 100%;
+        margin-bottom: 60px;
     }
     .lp-user-handler{
         width: 100%;

@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require('path');
-const dbName = require('./config/dbKeys');
+const dbName = require('./config/dbKey/dbKeys');
 const passport = require('passport');
 // passport config
 require('./config/passport')(passport);

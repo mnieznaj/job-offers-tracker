@@ -4,7 +4,7 @@ const morgan = require("morgan");
 // const flash = require("connect-flash");
 const path = require('path');
 
-const dbName = require('./config/dbKeys');
+const dbName = require('./config/dbKey/dbKeys');
 // require('./config/passport');
 
 const session = require("express-session");

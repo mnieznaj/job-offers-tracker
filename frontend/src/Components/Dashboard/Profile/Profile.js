@@ -17,7 +17,7 @@ const Profile = () => {
             <Route path={`${path}/changeName`} component={ChangeName} />
             <Route path={`${path}/changePassword`} component={ChangePassword} />
             <Route path={`${path}/changeMail`} component={ChangeMail} />
-            <Route path={`${path}/`} exact component={ProfileInfo} />
+            <Route path={`${path}`} exact component={ProfileInfo} />
         </Switch>
         </React.Fragment>
     )

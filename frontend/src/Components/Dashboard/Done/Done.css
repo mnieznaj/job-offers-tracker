@@ -8,6 +8,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    opacity: 1;
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn; 
+    animation-duration: 0.2s;   
+    -webkit-animation-duration: 0.2s;
+    animation-timing-function: ease-in; 
+    -webkit-animation-timing-function: ease-in;
 }
 .done--hide{
     display: none
@@ -19,15 +27,14 @@
     min-width: 40px;
     min-height: 40px;
 }
-.done-icon--visible{
+.done-animation--visible{
     opacity: 1;
     animation-name: fadeIn;
     -webkit-animation-name: fadeIn; 
-    animation-duration: 3s;   
-    -webkit-animation-duration: 3s;
-    animation-timing-function: ease-in-out; 
-    -webkit-animation-timing-function: ease-in-out;     
-    visibility: visible !important; 
+    animation-duration: 0.4s;   
+    -webkit-animation-duration: 0.4s;
+    animation-timing-function: ease-in; 
+    -webkit-animation-timing-function: ease-in;
 }
 .done-text{
     font-family: 'Barlow', sans-serif;
@@ -44,10 +51,6 @@
     0% {
         opacity: 0.0;       
     }
-    30% {
-        opacity: 1; 
-    }
-
     100% {
         opacity: 1; 
     }       
@@ -57,10 +60,6 @@
     0% {
         opacity: 0.0;       
     }
-    30% {
-        opacity: 1; 
-    }
-
     100% {
         opacity: 1; 
     }      
