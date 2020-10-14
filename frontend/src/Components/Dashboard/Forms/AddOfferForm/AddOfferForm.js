@@ -19,10 +19,12 @@ class AddOfferForm extends React.Component {
         this.state = {
             hearts: 0,
             status: "none",
-            currency: ""
+            currency: "",
+            country: ""
         }
         this.setStatus = this.setStatus.bind(this);
         this.setCurrency = this.setCurrency.bind(this);
+        this.setCountry = this.setCountry.bind(this);
     }
     
     setStatus(input){
@@ -35,13 +37,19 @@ class AddOfferForm extends React.Component {
             currency: input
         })
     }
+    setCountry(input){
+        this.setState({
+            country: input
+        })
+    }
 
     getFormData(){
         const formData = {};
         formData.title = document.getElementById('title').value;
         formData.link = document.getElementById('link').value;
         formData.company = document.getElementById('company').value;
-        formData.country = document.getElementById('country').value;
+        // formData.country = document.getElementById('country').value;
+        formData.country = this.state.country;
         formData.city = document.getElementById('city').value;
         formData.paygrade = document.getElementById('paygrade').value;
         formData.currency = this.state.currency;
@@ -69,8 +77,10 @@ class AddOfferForm extends React.Component {
         .then(response => response.json())
         .then(response => {
             if(response.error === false){
-                requestSucceded();
-                window.location.href = window.origin + "/app";
+                requestSucceded(2900);
+                setTimeout(() => {
+                    window.location.href = window.origin + "/app";
+                }, 2900)
 
             }
             return response
@@ -89,9 +99,9 @@ class AddOfferForm extends React.Component {
         let heartList = [];
         for(let i = 0; i < 5; i++){
             if(i < (isNaN(heartsNo) ? 0 : heartsNo)){
-                heartList.push(<FilledHeart onClick={() => this.setRating(i)}/>)
+                heartList.push(<FilledHeart key={"heart-" + i} onClick={() => this.setRating(i)}/>)
             }else{
-                heartList.push(<Heart onClick={() => this.setRating(i)}/>)
+                heartList.push(<Heart key={"heart-" + i} onClick={() => this.setRating(i)}/>)
             }
         }
         return heartList;
@@ -112,12 +122,12 @@ class AddOfferForm extends React.Component {
                         <label htmlFor="paygrade" className="form-label">Paygrade</label>
                         <DropdownCurrency currency={this.setCurrency}/>
                         <label htmlFor="country" className="form-label">Country</label>
-                        <DropdownCountry />
+                        <DropdownCountry country={this.state.country} setCountry={this.setCountry}/>
                         <label htmlFor="city" className="form-label">City</label>
                         <input type="text" id="city" name="city" required className="form-input" placeholder="City"/>
                         <label htmlFor="favRating" className="form-label">Rating</label>
                         <select id="favRating" name="favRating" className="hide">
-                            <option value="1" name="1" selected>1</option>
+                            <option value="1" name="1">1</option>
                             <option value="2" name="2">2</option>
                             <option value="3" name="3">3</option>
                             <option value="4" name="4">4</option>

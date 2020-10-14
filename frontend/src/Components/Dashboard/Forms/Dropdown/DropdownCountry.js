@@ -9,11 +9,9 @@ class Dropdown extends React.Component {
         super(props);
         this.state = {
           listOpen: false,
-          headerTitle: "none",
-          activeCountry: "",
+          headerTitle: props.country,
           itemsList: Countries
         }
-        this.setHeaderTitle = this.setHeaderTitle.bind(this)
     }
       
     toggleList(){
@@ -22,27 +20,30 @@ class Dropdown extends React.Component {
         }))
     }
     setListItems(){
-        const list = this.state.itemsList.map(item => {
-            return <li className="dropdown__list-item " onClick={() => this.setActiveCountry(item.countryName)}>{item.countryName}</li>
+        const list = this.state.itemsList.map((item, index) => {
+            return <li key={"country-" + index} className="dropdown__list-item " onClick={() => this.setActiveCountry(item.countryName)}>{item.countryName}</li>
         })
         return list;
     }
-    setHeaderTitle(country){
-        this.setState({
-            headerTitle: country
-          });
-    }
+    
     setActiveCountry(country){
-        this.setHeaderTitle(country);
+        // this.setState({
+        //     headerTitle: country
+        //   });
+        this.props.setCountry(country);
         this.toggleList();
     }
 
     render(){
+        console.log("DropdownCountry: "+this.state.country);
         return(
             <div className={`dropdown`}>
                 <div className="dropdown__header">
                     <div className="dropdown__header-title" >
-                        <input id="country" name="country" className="dropdown__header-title-text country-input" onChange={this.setHeaderTitle} value={this.state.headerTitle}/>
+                        {/* <input id="country" name="country" className="dropdown__header-title-text country-input" onChange={this.setHeaderTitle} value={this.state.headerTitle}/> */}
+                        <span id="country" name="country" className="dropdown__header-title-text">
+                            {this.state.headerTitle}
+                        </span>
                         <button className="dropdown__header-title-button country-list-btn" type="button" onClick={()=> this.toggleList()}>
                             <img src={arrow} alt="arrow icon"/>
                         </button>

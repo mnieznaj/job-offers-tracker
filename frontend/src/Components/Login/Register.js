@@ -17,7 +17,6 @@ const Register = (props) => {
                 password,
                 repeatPassword
             }
-            console.log(data);
             fetch("/users/register-user", {
                 method:'POST',
                 mode: 'cors',
@@ -29,7 +28,7 @@ const Register = (props) => {
             .then(data => console.log(data))
             .catch(err => console.log(err));
         } else {
-            console.log("wrong data. add more specific validation")
+            document.getElementById("error-message").textContent = "Incorrect password";
         }
     }
     return(
@@ -44,7 +43,7 @@ const Register = (props) => {
                 <input type="password" id="reg-password" name="reg-password" placeholder="Enter Password" className="form-input form-homepage-input" required></input>
                 <label className="form-label">Repeat Password</label>
                 <input type="password" id="repeat-reg-password" name="repeat-reg-password" placeholder="Repeat Password" className="form-input form-homepage-input" required></input>
-                <p className="form-error-msg">Incorrect</p>
+                <p className="form-error-msg" id="error-message"> </p>
                 <button type="submit" onClick={(event) => register(event)} className="form-button">Register</button>
             </form>
             <p className="form-paragraph">Already have an acount?<br/><span className="switch-homescreen" onClick={() => props.changeForm("login")}>Log in!</span></p>

@@ -15,7 +15,7 @@ const Login = (props) => {
             email,
             password
         }
-        console.log(data);
+        // console.log(data);
         fetch("/users/login-user", {
             method:'POST',
             mode: 'cors',
@@ -25,7 +25,7 @@ const Login = (props) => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             props.setToken(data.token);
             props.setUserId(data.userId);
             props.setDbId(data.dbId);

@@ -20,15 +20,22 @@ class EditOfferForm extends React.Component {
             id: this.props.id,
             hearts: 0,
             status: "none",
-            currency: ""
+            currency: "",
+            country: ""
         }
         this.setStatus = this.setStatus.bind(this);
         this.setCurrency = this.setCurrency.bind(this);
+        this.setCountry = this.setCountry.bind(this);
     }
     
     setStatus(input){
         this.setState({
             status: input
+        })
+    }
+    setCountry(input){
+        this.setState({
+            country: input
         })
     }
     setCurrency(input){
@@ -54,11 +61,16 @@ class EditOfferForm extends React.Component {
                 document.getElementById('title').value = formData.title;
                 document.getElementById('link').value = formData.link;
                 document.getElementById('company').value = formData.company;
-                document.getElementById('country').value = formData.country;
+                // document.getElementById('country').value = formData.country;
+                this.setState({country: formData.country});
+                console.log("country set: " + this.state.country);
                 document.getElementById('city').value = formData.city;
                 document.getElementById('paygrade').value = formData.paygrade;
-                document.getElementById('status').selectedIndex = formData.status;
-                document.getElementById('favRating').selectedIndex = formData.favRating -1;
+                this.setState({currency: formData.currency});
+                // document.getElementById('status').selectedIndex = formData.status;
+                this.setStatus(formData.status);
+                // document.getElementById('favRating').selectedIndex = formData.favRating -1;
+                this.setRating(formData.favRating);
                 document.getElementById('description').value = formData.description;
             })
             .catch(err => console.log(err));  
@@ -74,10 +86,10 @@ class EditOfferForm extends React.Component {
         formData.paygrade = document.getElementById('paygrade').value;
         formData.currency = this.state.currency;
         formData.status = this.state.status;
-        console.log(formData.status);
+        console.log("get form data status: " + formData.status);
         // const favRating = document.getElementById('favRating');
         // formData.favRating = favRating.options[favRating.selectedIndex].value;
-        console.log(formData.favRating);
+        console.log("get form data rating: " + formData.favRating);
         formData.favRating = this.state.hearts + 1;
         formData.description = document.getElementById('description').value;
         return formData;
@@ -97,7 +109,10 @@ class EditOfferForm extends React.Component {
         .then(response => response.json())
         .then(response => {
             if(response.error === false){
-                requestSucceded();
+                requestSucceded(2900);
+                setTimeout(() => {
+                    window.location.href = window.origin + "/app";
+                }, 2900)
             }
             return response
         })
@@ -109,24 +124,25 @@ class EditOfferForm extends React.Component {
         this.setState({
             hearts: ratingValue
         })
-        document.getElementById('favRating').options[ratingValue].selected = true;
     };
     renderHearts(heartsNo){
         let heartList = [];
         for(let i = 0; i < 5; i++){
             if(i < (isNaN(heartsNo) ? 0 : heartsNo)){
-                heartList.push(<FilledHeart onClick={() => this.setRating(i)}/>)
+                heartList.push(<FilledHeart key={"heart-" + i} onClick={() => this.setRating(i)}/>)
             }else{
-                heartList.push(<Heart onClick={() => this.setRating(i)}/>)
+                heartList.push(<Heart key={"heart-" + i} onClick={() => this.setRating(i)}/>)
             }
         }
         return heartList;
     };
 
-    
+    componentDidMount(){
+        this.setFormData();
+    }
     
     render(){
-        this.setFormData();
+        console.log("current edit form country" + this.state.country);
         return(
             <React.Fragment>
                 <h2 className="form-title">Edit offer</h2>
@@ -141,27 +157,27 @@ class EditOfferForm extends React.Component {
                         <label htmlFor="paygrade" className="form-label">Paygrade</label>
                         <DropdownCurrency currency={this.setCurrency}/>
                         <label htmlFor="country" className="form-label">Country</label>
-                        <DropdownCountry />
+                        <DropdownCountry country={this.state.country} setCountry={this.setCountry}/>
                         <label htmlFor="city" className="form-label">City</label>
                         <input type="text" id="city" name="city" required className="form-input"/>
                         <label htmlFor="favRating" className="form-label">Rating</label>
-                        <select id="favRating" name="favRating" className="hide">
-                                <option value="1" name="1" selected>1</option>
+                        {/* <select id="favRating" name="favRating" className="hide">
+                                <option value="1" name="1">1</option>
                                 <option value="2" name="2">2</option>
                                 <option value="3" name="3">3</option>
                                 <option value="4" name="4">4</option>
                                 <option value="5" name="5">5</option>
-                        </select>
+                        </select> */}
                         <span className="heart-icons">
                             {this.renderHearts(this.state.hearts + 1)}
                         </span>
                         <label htmlFor="status" className="form-label">Status</label>
-                        <select id="status" name="status" className="hide">
+                        {/* <select id="status" name="status" className="hide">
                                 <option value="none" name="none">none</option>
                                 <option value="applied" name="applied">applied</option>
                                 <option value="rejected" name="rejected">rejected</option>
                                 <option value="succeded" name="succeded">succeded</option>
-                        </select>
+                        </select> */}
                         <Dropdown title={this.state.status} status={this.setStatus}/>
                         <label htmlFor="description" className="form-label">Description</label>
                         <textarea id="description" name="description" rows="10" cols="30" className="form-description"></textarea>

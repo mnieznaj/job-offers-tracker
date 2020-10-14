@@ -8,7 +8,7 @@ const initialState = {
     dbId: null,
     userToken: localStorage.getItem("token") ? localStorage.getItem("token") : null,
     currentOfferId: null,
-    offersFilter: null
+    offersFilter: "title"
 }
 
 const reducer = (state = initialState, action) => {

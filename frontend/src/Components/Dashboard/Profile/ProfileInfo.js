@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import logoutIcon from './logout-icon.svg';
 
 
 const ProfileInfo = () => {
@@ -27,9 +28,11 @@ const ProfileInfo = () => {
                     <p className="form-label">Password</p>
                     <Link className="profile__edit-btn-link" to={`${url}/changePassword`}><button className="profile__edit-btn">Edit</button></Link>
                 </section>
+                <section className="profile__section">
+                    <p className="form-label profile-logout"><img className="profile-logout-icon" src={logoutIcon} alt="logout icon" /> Logout</p>
+                    <button onClick={logout} className="profile__edit-btn">Logout</button>
+                </section>
             </div>
-            {/* <DragAndDrop /> */}
-            <button onClick={logout} className="profile__form-button">Logout</button>
         </div>
     )
 }

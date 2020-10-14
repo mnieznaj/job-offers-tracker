@@ -22,8 +22,8 @@ class Dropdown extends React.Component {
         }))
     }
     setListItems(){
-        const list = this.state.itemsList.map(item => {
-            return <li className="dropdown__list-item " onClick={() => this.setActiveCurrency(item.currencyCode)}>{item.currencyCode}</li>
+        const list = this.state.itemsList.map((item, index) => {
+            return <li key={"currency" + index} className="dropdown__list-item " onClick={() => this.setActiveCurrency(item.currencyCode)}>{item.currencyCode}</li>
         })
         return list;
     }

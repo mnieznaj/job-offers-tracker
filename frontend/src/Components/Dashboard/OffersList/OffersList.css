@@ -5,3 +5,11 @@
     width: 200px;
     margin: 15px 0;
 }
+.offers-list__no-offers{
+    margin:  100px 0px;
+    text-align: center;
+    font-size: 30px;
+}
+.offers-list-loading{
+    object-fit: contain;
+}

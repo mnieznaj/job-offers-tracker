@@ -7,7 +7,7 @@ class Dropdown extends React.Component {
         super(props);
         this.state = {
           listOpen: false,
-          headerTitle: "none",
+          headerTitle: this.props.title,
           itemsList: [
               "none",
               "applied",
@@ -24,9 +24,9 @@ class Dropdown extends React.Component {
     setListItems(){
         const list = this.state.itemsList.map(item => {
             if(item === this.state.headerTitle){
-                return <li className="dropdown__list-item dropdown__list-item--active" onClick={() => this.setHeaderTitle(item)}>{item}</li>
+                return <li className="dropdown__list-item dropdown__list-item--active" key={this.props.keyId+"-"+item} onClick={() => this.setHeaderTitle(item)}>{item}</li>
             }else{
-                return <li className="dropdown__list-item" onClick={() => this.setHeaderTitle(item)}>{item}</li>
+                return <li className="dropdown__list-item" key={this.props.keyId+"-"+item} onClick={() => this.setHeaderTitle(item)}>{item}</li>
             }
         })
         return list;

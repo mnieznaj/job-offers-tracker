@@ -31,16 +31,16 @@ class FilterDropdown extends React.Component {
                     </div>
                 </div>
                 <ul className={"filter-dropdown__list " + (this.state.listOpen ? "" : "hide-element")}>
-                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("title"); this.toggleList()}}>
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("title"); this.props.sortBy("title"); this.toggleList()}}>
                         Title
                     </li>
-                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("createdAt"); this.toggleList()}}>
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("createdAt"); this.props.sortBy("createdAt"); this.toggleList()}}>
                         Date
                     </li>
-                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("paygrade"); this.toggleList()}}>
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("paygrade"); this.props.sortBy("paygrade"); this.toggleList()}}>
                         Paygrade
                     </li>
-                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("status"); this.toggleList()}}>
+                    <li className="filter-dropdown__list-item" onClick={() => {this.props.setFilter("status"); this.props.sortBy("status"); this.toggleList()}}>
                         Status
                     </li>
                 </ul>

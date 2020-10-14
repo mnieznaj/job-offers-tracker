@@ -3,7 +3,7 @@
 .offer-list_item{
     display: block;
     max-width: 1200px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .offer{
@@ -73,7 +73,8 @@
     flex-direction: column;
     width: 100%;
     grid-area: location;
-    text-align: end;
+    text-align: left;
+
 }
 .offer-body__location-section > * {
     margin-bottom: 10px;
@@ -115,7 +116,7 @@
     display: none;
 }
 
-@media (min-width: 1000px){
+@media (min-width: 800px){
     .offer-body{
         width: 100%;
         padding: 0 82px 82px 82px;
@@ -129,6 +130,9 @@
     .offer-body__link-section{
         align-items: end;
         margin-bottom: 0px;
+    }
+    .offer-body__location-section{
+        text-align: end;
     }
     .offer-body__section-wrap{
         justify-content: space-between;

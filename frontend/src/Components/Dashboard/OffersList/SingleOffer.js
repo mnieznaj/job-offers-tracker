@@ -15,6 +15,7 @@ import {ReactComponent as LinkIcon} from "./link-icon.svg";
 
 const SingleOffer = (props) => {
     const data = props.offer;
+    console.log("offer data inside single offer: " + data.status);
     let { url } = useRouteMatch();
 
     const deleteOfferHandler = () => {
@@ -29,17 +30,17 @@ const SingleOffer = (props) => {
             body: JSON.stringify({id : data._id})
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => console.log("offer deleted" + data))
         .catch(err => console.log(err));
     }
     
-    const renderHearts = (heartsNo) => {
+    const renderHearts = (heartsNo, id) => {
         let heartList = [];
         for(let i = 0; i < 5; i++){
             if(i < heartsNo){
-                heartList.push(<FilledHeart />)
+                heartList.push(<FilledHeart key={id + "-heart-" + i} />)
             }else{
-                heartList.push(<Heart />)
+                heartList.push(<Heart key={id + "-heart-" + i} />)
             }
         }
         return heartList;
@@ -59,10 +60,10 @@ const SingleOffer = (props) => {
                 <div className="offer-body">
                     <span className="offer-body__header-section">
                         <h2 className="offer-body__header-section--title">{data.title}</h2>
-                        <span className="offer-body__header-section--rating">
-                            {renderHearts(data.favRating)}
+                        <span className="offer-body__header-section--rating heart-icons">
+                            {renderHearts(data.favRating, data._id)}
                         </span>
-                        <Dropdown title={data.status} clss="offer-body__header-section--status"/>
+                        <Dropdown title={data.status} keyId={data._id} clss="offer-body__header-section--status"/>
                     </span>
                     <span className="offer-body__section-wrap">
                         <span className="offer-body__location-section">

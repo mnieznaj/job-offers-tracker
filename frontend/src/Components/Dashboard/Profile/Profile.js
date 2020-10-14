@@ -5,10 +5,9 @@ import ProfileInfo from './ProfileInfo';
 import ChangeName from './ChangeName';
 import ChangePassword from './ChangePassword';
 import ChangeMail from './ChangeMail';
-// import DragAndDrop from './DragAndDrop';
 import {Switch, Route, useRouteMatch} from 'react-router-dom';
 
-const Profile = (props) => {
+const Profile = () => {
     let { path } = useRouteMatch();
 
     return(

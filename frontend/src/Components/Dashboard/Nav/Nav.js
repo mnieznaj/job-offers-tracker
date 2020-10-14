@@ -16,13 +16,13 @@ const Nav = () => {
             <span className="nav-bar-width">
                 <Link to={`${url}`}><Logo /></Link>
                 <ul className="nav-bar__list">
-                    <NavLink className="nav-bar__list-link" activeStyle={{color:"#131C48"}} to={`${url}/add`} /*onClick={() => props.displayAddOffer(true)}*/>
+                    <NavLink className="nav-bar__list-link" activeStyle={{opacity: 1}} to={`${url}/add`}>
                         <li className="nav-bar__list-item"><AddIcon/> <span>add</span></li>
                     </NavLink>
-                    <NavLink className="nav-bar__list-link" activeStyle={{color:"#131C48"}} to={`${url}/dashboard`}>
+                    <NavLink className="nav-bar__list-link" activeStyle={{opacity: 1}} to={`${url}/dashboard`}>
                         <li className="nav-bar__list-item"><SearchIcon/> <span>search</span></li>
                     </NavLink>
-                    <NavLink className="nav-bar__list-link" activeStyle={{color:"#131C48"}} to={`${url}/profile`}>
+                    <NavLink className="nav-bar__list-link" activeStyle={{opacity: 1}} to={`${url}/profile`}>
                         <li className="nav-bar__list-item"><ProfileIcon/> <span>profile</span></li>
                     </NavLink>
                 </ul>

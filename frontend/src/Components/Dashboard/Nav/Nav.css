@@ -29,13 +29,14 @@
 }
 .nav-bar__list-link{
     margin-right: 24px;
-    color: #D6D7DD;
+    color: #131C48;
     text-decoration: none;
     font-family: Barlow;
     font-style: normal;
     font-weight: 500;
     font-size: 22px;
     line-height: 26px;
+    opacity: 0.3
 }
 .nav-bar__list-item{
     display:flex;

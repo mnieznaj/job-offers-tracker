@@ -1,6 +1,6 @@
 import React from 'react';
 import './Done.css';
-import doneIcon from './done-icon.svg';
+import doneAnimation from './done-animation.gif';
 
 // class Done extends React.Component {
     // constructor(props){
@@ -14,7 +14,7 @@ const Done = () => {
     return(
         <div id="done" className="done done--hide">
             <span className="done-content">
-                <img className={"done-icon"} src={doneIcon} alt="done" />
+                <img className={"done-animation"} src={doneAnimation} alt="done" loading="lazy"/>
                 {/* <span className="done-text">Done</span> */}
             </span>
         </div>

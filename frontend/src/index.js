@@ -29,14 +29,10 @@ ReactDOM.render(
           <Route path="/" exact component={Home} />
           <Route path="/app" component={App} />
         </Switch>
-        {/* {localStorage.getItem('token') ? <Route path="/app"><App /></Route> : <Route path="/"><Home /></Route>} */}
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

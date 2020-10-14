@@ -3,28 +3,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* position: fixed; */
-    /* z-index: 1; */
-    /* overflow-y: scroll; */
     width:100%;
     height:100%;
+    
     background-color: #ffffff;
     border-radius: 8px;
+    margin: 24px;
 }
 
-/* .offer-form__background{
-    width: 100vw;
-    min-height: 800px;
-    height: 100%;
-    background-color: rgba(0,0,0,0.3);
-} */
+
 
 .offer-form__form{
-    /* z-index: 1;
-    position: absolute; */
-
     max-width: 500px;
     padding: 24px;
+    
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -43,7 +35,7 @@
 }
 .form-title{
     font-family: 'Bree Serif', serif;
-    font-size: 44px;
+    font-size: 36px;
     margin: 40px 0;
     text-align: center;
 }
