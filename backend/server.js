@@ -71,8 +71,7 @@ app.use(
 const users = require('./routes/users.js')
 app.use('/users', users);
 
-// coś się zjebało z get requestem dla listy jak dodałem poniższe
-// app.use('/app', require('./routes/app-router.js'));
+
 const appRouter = require('./routes/app-router.js');
 app.use('/app', passport.authenticate('jwt', { session : false }), appRouter);
 
@@ -83,6 +82,5 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res) => {
-  // res.status(404).render("404");
   res.status(404).sendFile(path.join(__dirname, 'build', '404.html'));;
 });

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import logoutIcon from './logout-icon.svg';
 
-
 const ProfileInfo = () => {
     const logout = () => {
         localStorage.removeItem("token");

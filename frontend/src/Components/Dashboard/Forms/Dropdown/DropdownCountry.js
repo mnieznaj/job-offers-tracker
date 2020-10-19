@@ -25,8 +25,8 @@ class DropdownCountry extends React.Component {
         return list;
     }
     
-    setActiveCountry(country){
-        this.props.setCountry(country);
+    setActiveCountry(value){
+        this.props.handler("country", value);
         this.toggleList();
     }
 
@@ -35,9 +35,8 @@ class DropdownCountry extends React.Component {
             <div className={`dropdown`}>
                 <div className="dropdown__header">
                     <div className="dropdown__header-title" >
-                        {/* <input id="country" name="country" className="dropdown__header-title-text country-input" onChange={this.setHeaderTitle} value={this.state.headerTitle}/> */}
                         <span id="country" name="country" className="dropdown__header-title-text">
-                            {this.props.children}
+                            {this.props.country}
                         </span>
                         <button className="dropdown__header-title-button country-list-btn" type="button" onClick={()=> this.toggleList()}>
                             <img src={arrow} alt="arrow icon"/>

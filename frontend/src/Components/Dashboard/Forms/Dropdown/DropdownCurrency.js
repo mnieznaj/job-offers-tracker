@@ -9,10 +9,9 @@ class Dropdown extends React.Component {
         super(props);
         this.state = {
           listOpen: false,
-          headerTitle: 0,
           itemsList: Countries
         }
-        this.setHeaderTitle = this.setHeaderTitle.bind(this)
+        this.toggleList = this.toggleList.bind(this)
     }
       
     toggleList(){
@@ -22,18 +21,13 @@ class Dropdown extends React.Component {
     }
     setListItems(){
         const list = this.state.itemsList.map((item, index) => {
-            return <li key={"currency" + index} className="dropdown__list-item " onClick={() => this.setActiveCurrency(item.currencyCode)}>{item.currencyCode}</li>
+            return <li key={"currency" + index} className="dropdown__list-item " onClick={() => this.setActiveCurrency("currency", item.currencyCode)}>{item.currencyCode}</li>
         })
         return list;
     }
-    setActiveCurrency(input){
-        this.props.currency(input);
+    setActiveCurrency(key, value){
+        this.props.handler(key, value);
         this.toggleList();
-    }
-    setHeaderTitle(input){
-        this.setState({
-            headerTitle: input.target.value
-          })
     }
 
     render(){
@@ -41,9 +35,9 @@ class Dropdown extends React.Component {
             <div className={`dropdown`}>
                 <div className="dropdown__header">
                     <div className="dropdown__header-title" >
-                        <input id="paygrade" name="paygrade" className="dropdown__header-title-text currency-input" onChange={this.setHeaderTitle} placeholder="0"/>
-                        <button className="dropdown__header-title-button currency-list-btn" type="button" onClick={()=> this.toggleList()}>
-                            {this.props.children !== "" ? this.props.children : <img src={arrow} alt=""/>}
+                        <input value={this.props.value} name="paygrade" className="dropdown__header-title-text currency-input" onChange={this.props.paygradeHandler} placeholder={this.props.paygrade}/>
+                        <button className="dropdown__header-title-button currency-list-btn" type="button" onClick={this.toggleList}>
+                            {this.props.currency !== "" ? this.props.currency : <img src={arrow} alt=""/>}
                         </button>
                     </div>
                 </div>

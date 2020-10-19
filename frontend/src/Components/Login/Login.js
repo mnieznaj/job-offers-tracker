@@ -3,7 +3,7 @@ import './Login.css';
 import '../Dashboard/Forms/Form.css'
 
 import { connect } from 'react-redux';
-import { setUserToken, setDbId, setUserId } from '../../store/actions/dashboardActions';
+import { setUserToken, setUserId } from '../../store/actions/dashboardActions';
 
 const Login = (props) => {
     const login = (event) => {
@@ -15,7 +15,6 @@ const Login = (props) => {
             email,
             password
         }
-        // console.log(data);
         fetch("/users/login-user", {
             method:'POST',
             mode: 'cors',
@@ -25,17 +24,14 @@ const Login = (props) => {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data);
             props.setToken(data.token);
             props.setUserId(data.userId);
-            props.setDbId(data.dbId);
             return data
         })
         .then(data => {
             if(data.token && (!localStorage.getItem("token") || localStorage.getItem("token") === undefined)){
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userId", data.userId);
-                localStorage.setItem("dbId", data.dbId);
                 
                 window.location.href = window.location + "app";
             } else {
@@ -64,8 +60,7 @@ const Login = (props) => {
 const mapDispatchToProps = dispatch => {
     return {
         setToken: (token) => dispatch(setUserToken(token)),
-        setUserId: (id) => dispatch(setUserId(id)),
-        setDbId: (id) => dispatch(setDbId(id))
+        setUserId: (id) => dispatch(setUserId(id))
     }
 }
 

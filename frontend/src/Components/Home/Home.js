@@ -19,7 +19,6 @@ class Home extends Component {
         this.setState({
             form: formState
         });
-        console.log(this.state.form)
     }
     render(){
         const homeHandler = (

@@ -23,7 +23,6 @@ class OffersList extends Component {
     sortByCategoryAsc(cat){
         if(cat === "title" || cat === "createdAt" || cat === "status" || cat === "paygrade"){
             const sortedOffers = [...this.state.offers];
-            // console.log("nieposortowane oferty: " + sortedOffers.map(offer => offer.title));
             sortedOffers.sort((a,b) => {
                 if(a[cat] < b[cat]){
                     return -1;
@@ -33,7 +32,6 @@ class OffersList extends Component {
                     return 0;
                 }
             });
-            // console.log("posortowane oferty: " + sortedOffers.map(offer => offer.title));
             this.setState({offers: sortedOffers})
         }
     }
@@ -54,14 +52,10 @@ class OffersList extends Component {
     
     render(){
         this.sortByCategoryAsc(this.state.sortCategory);
-        // console.log( this.state.offers );
         const list = this.state.offers.map(offer => <SingleOffer offer={offer} key={offer._id} />);
         return (
-            // this.state.isloading ? <img src={loadingSpinner} alt="loading animation" className="offers-list-loading"/> 
-            // : 
             list.length === 0 ? (
                 <React.Fragment>
-                    {/* <p className="offers-list__no-offers">No offers.</p> */}
                     <img src={loadingSpinner} alt="loading animation" className="offers-list-loading"/>
                 </React.Fragment>
             ) 

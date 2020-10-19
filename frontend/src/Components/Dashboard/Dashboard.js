@@ -7,7 +7,6 @@ const Dashboard = () => {
     
   return (
     <div className="dashboard">
-      {/* <h2 className="dashboard__title">Dashboard</h2> */}
       <Suspense fallback={loadingSpinner}>
         <OffersList />
       </Suspense>

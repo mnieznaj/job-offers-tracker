@@ -2,10 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     offersList: [],
-    displayAddOffer: false,
-    displayUpdateOffer: false,
     userId: null,
-    dbId: null,
     userToken: localStorage.getItem("token") ? localStorage.getItem("token") : null,
     currentOfferId: null,
     offersFilter: "title"
@@ -43,13 +40,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 userId: action.id
             }
-        case actionTypes.SET_DB_ID:
-            return {
-                ...state,
-                dbId: action.id
-            }
-        // default:
-        //     return state
+        // no default
     }
     return state;
 }

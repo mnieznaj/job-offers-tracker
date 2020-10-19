@@ -37,9 +37,3 @@ export const setUserId = id => {
         id: id
     }
 }
-export const setDbId = id => {
-    return {
-        type: actionTypes.SET_DB_ID,
-        id: id
-    }
-}
