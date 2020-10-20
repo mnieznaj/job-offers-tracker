@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import Login from '../Login/Login';
-import Register from '../Login/Register';
+import Login from './Login/Login';
+import Register from './Login/Register';
 import './Home.css';
 import homeGif from "./home.gif";
 
@@ -32,7 +33,7 @@ class Home extends Component {
         );
         return (
             <div className="landing-page">
-                {localStorage.getItem('token') ? <Redirect to="/app/"/> : null}
+                {this.props.token ? <Redirect to="/app/"/> : null}
                 <div className="lp-info">
                     <img className="lp-info__animation" src={homeGif} alt="animation"/>
                     <p className="lp-info__p">Can't keep track of<br/> all job offers you<br/> applied to?</p>
@@ -46,4 +47,10 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = state => {
+    return {
+        token: state.userToken
+    }
+  }
+
+export default connect(mapStateToProps)(Home);

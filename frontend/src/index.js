@@ -8,13 +8,25 @@ import * as serviceWorker from './serviceWorker';
 
 // REDUX
 import { createStore } from 'redux';
-import reducer from './store/reducers/dashboardHandler';
+import rootReducer from './store/reducers/dashboardHandler';
 import { Provider } from 'react-redux';
+// REDUX PERSIST
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 // Router
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
-const store = createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['userToken']
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = createStore(persistedReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+let persistor = persistStore(store);
 
 store.subscribe(() => {
   console.log(store.getState());
@@ -23,6 +35,7 @@ store.subscribe(() => {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <Done />
         <Switch>
@@ -30,6 +43,7 @@ ReactDOM.render(
           <Route path="/app" component={App} />
         </Switch>
       </BrowserRouter>
+    </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

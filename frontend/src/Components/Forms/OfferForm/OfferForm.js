@@ -57,18 +57,14 @@ class AddOfferForm extends React.Component {
     componentDidMount(){
         const id = this.id;
         if(id){
-            const token = localStorage.getItem("token");
+            const token = this.props.token;
             fetch(`/app/get-offer-list/${id}`,{
                 method: "GET",
                 headers: setAuthHeader(token)
             })
                 .then(response => response.json())
                 .then(data => {
-                    // console.log("data from get offer by id: " + data);
-                    // console.log(data);
                     this.setState({...data});
-                    // console.log("State in edit after sync: ");
-                    // console.log(this.state);
                 })
                 .catch(err => console.log(err));  
         }
@@ -114,8 +110,10 @@ class AddOfferForm extends React.Component {
 }
 const mapStateToProps = state => {
     return {
-        userId: state.userId
+        userId: state.userId,
+        token: state.userToken
     }
 }
+
 
 export default connect(mapStateToProps)(AddOfferForm);

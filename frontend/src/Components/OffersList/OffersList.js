@@ -5,7 +5,7 @@ import './OffersList.css';
 import { connect } from 'react-redux';
 import { setOffersList } from '../../../store/actions/dashboardActions';
 import { setAuthHeader } from '../../../utils/setAuthHeader';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 import loadingSpinner from '../../Loading/loading-animation.gif';
 
 
@@ -37,7 +37,7 @@ class OffersList extends Component {
     }
     
     componentDidMount(){
-        const token= localStorage.getItem("token");
+        const token= this.props.token;
         fetch('/app/get-offer-list', {
             method: "GET",
             headers: setAuthHeader(token)})
@@ -55,17 +55,17 @@ class OffersList extends Component {
         const list = this.state.offers.map(offer => <SingleOffer offer={offer} key={offer._id} />);
         return (
             list.length === 0 ? (
-                <React.Fragment>
+                <div className="dashboard">
                     <img src={loadingSpinner} alt="loading animation" className="offers-list-loading"/>
-                </React.Fragment>
+                </div>
             ) 
             : (
-                <React.Fragment>
+                <div className="dashboard">
                     <SearchBar sortBy={this.sortByCategoryAsc}/>
                     <ul className="offers-list">
                         {list}
                     </ul>
-                </React.Fragment>
+                </div>
             )
         )
     } 
@@ -74,7 +74,8 @@ class OffersList extends Component {
 const mapStateToProps = state => {
     return {
         offersList: state.offersList,
-        sortingFilter: state.offersFilter
+        sortingFilter: state.offersFilter,
+        token: state.userToken
     }
 }
 const mapDispatchToProps = dispatch => {

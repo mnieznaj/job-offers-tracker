@@ -1,6 +1,5 @@
 import React from 'react';
 
-// props - name and update and value
 const Input = props => {
     const name = props.name.toLowerCase();
     return(

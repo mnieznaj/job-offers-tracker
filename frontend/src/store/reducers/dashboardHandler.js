@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     offersList: [],
     userId: null,
-    userToken: localStorage.getItem("token") ? localStorage.getItem("token") : null,
+    // userToken: localStorage.getItem("token") ? localStorage.getItem("token") : null,
+    userToken: null,
     currentOfferId: null,
     offersFilter: "title"
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import '../Dashboard/Forms/Form.css'
+import '../../Dashboard/Forms/Form.css';
 
 const Register = (props) => {
     const register = (event) => {

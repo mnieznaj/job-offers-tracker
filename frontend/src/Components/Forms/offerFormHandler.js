@@ -14,7 +14,7 @@ export default function offerFormHandler(event){
         method = "PUT"
     }
 
-    const token = localStorage.getItem("token");
+    const token = this.props.token;
     fetch(request, {
         method: method,
         mode: 'cors',

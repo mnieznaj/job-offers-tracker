@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deleteUserToken } from '../../../store/actions/dashboardActions'
 import logoutIcon from './logout-icon.svg';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
     const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("dbId");
+        // localStorage.removeItem("token");
+        // localStorage.removeItem("userId");
+        // localStorage.removeItem("dbId");
+        props.deleteToken();
         window.location.reload();
     }
     let { url } = useRouteMatch();
@@ -36,4 +39,10 @@ const ProfileInfo = () => {
     )
 }
 
-export default ProfileInfo;
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteToken: () => dispatch(deleteUserToken())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ProfileInfo);

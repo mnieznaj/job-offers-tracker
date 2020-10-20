@@ -21,7 +21,7 @@ const SingleOffer = (props) => {
         const id = data._id;
         document.getElementById(id).remove();
         
-        const token = localStorage.getItem("token");
+        const token = props.token;
         fetch(`/app/delete-offer/${id}`, {
             method:'DELETE',
             mode: 'cors',
@@ -73,7 +73,8 @@ const SingleOffer = (props) => {
 
 const mapStateToProps = state => {
     return {
-        currentOfferId: state.currentOfferId
+        currentOfferId: state.currentOfferId,
+        token: state.userToken
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import './Login.css';
-import '../Dashboard/Forms/Form.css'
+import '../../Dashboard/Forms/Form.css';
 
 import { connect } from 'react-redux';
-import { setUserToken, setUserId } from '../../store/actions/dashboardActions';
+import { setUserToken, setUserId } from '../../../store/actions/dashboardActions';
 
 const Login = (props) => {
     const login = (event) => {
@@ -26,19 +26,20 @@ const Login = (props) => {
         .then(data => {
             props.setToken(data.token);
             props.setUserId(data.userId);
+            window.location.href = window.location + "app";
             return data
         })
-        .then(data => {
-            if(data.token && (!localStorage.getItem("token") || localStorage.getItem("token") === undefined)){
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("userId", data.userId);
+        // .then(data => {
+        //     if(data.token && (!localStorage.getItem("token") || localStorage.getItem("token") === undefined)){
+        //         localStorage.setItem("token", data.token);
+        //         localStorage.setItem("userId", data.userId);
                 
-                window.location.href = window.location + "app";
-            } else {
-                document.getElementById("login-error-msg").textContent = "Incorrect credentials";
-            }  
-            return data
-        })
+        //         // window.location.href = window.location + "app";
+        //     } else {
+        //         document.getElementById("login-error-msg").textContent = "Incorrect credentials";
+        //     }  
+        //     return data
+        // })
         .catch(err => console.log(err));
     }
     return(
