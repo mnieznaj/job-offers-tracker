@@ -1,5 +1,5 @@
-import { setAuthHeader } from '../../../utils/setAuthHeader';
-import { requestSucceded } from '../../../utils/requestSucceded';
+import { setAuthHeader } from '../../utils/setAuthHeader';
+import { requestSucceded } from '../../utils/requestSucceded';
 
 export default function offerFormHandler(event){
     event.preventDefault();

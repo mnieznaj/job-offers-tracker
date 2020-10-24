@@ -20,3 +20,17 @@
 .offers-list-loading{
     object-fit: contain;
 }
+
+.offer-loading{
+    width: 100%;
+    min-height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-top: 50px;
+}

@@ -3,10 +3,10 @@ import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 // import Dashboard from './Components/Dashboard/Dashboard';
-import OfferList from './Components/Dashboard/OffersList/OffersList';
-import OfferForm from './Components/Dashboard/Forms/OfferForm/OfferForm';
-import Nav from './Components/Dashboard/Nav/Nav';
-import Profile from './Components/Dashboard/Profile/Profile';
+import OfferList from './Components/OffersList/OffersList';
+import OfferForm from './Components/Forms/OfferForm/OfferForm';
+import Nav from './Components/Nav/Nav';
+import Profile from './Components/Profile/Profile';
 
 const App = (props) => {
     let { path } = useRouteMatch();

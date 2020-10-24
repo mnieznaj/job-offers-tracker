@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-import '../../Dashboard/Forms/Form.css';
+import '../../Forms/Form.css';
 
 import { connect } from 'react-redux';
 import { setUserToken, setUserId } from '../../../store/actions/dashboardActions';

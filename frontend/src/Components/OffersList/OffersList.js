@@ -3,10 +3,10 @@ import SingleOffer from './SingleOffer';
 import './OffersList.css';
 
 import { connect } from 'react-redux';
-import { setOffersList } from '../../../store/actions/dashboardActions';
-import { setAuthHeader } from '../../../utils/setAuthHeader';
+import { setOffersList } from '../../store/actions/dashboardActions';
+import { setAuthHeader } from '../../utils/setAuthHeader';
 import SearchBar from './SearchBar/SearchBar';
-import loadingSpinner from '../../Loading/loading-animation.gif';
+import loadingSpinner from '../Loading/loading-animation.gif';
 
 
 class OffersList extends Component {
@@ -55,7 +55,7 @@ class OffersList extends Component {
         const list = this.state.offers.map(offer => <SingleOffer offer={offer} key={offer._id} />);
         return (
             list.length === 0 ? (
-                <div className="dashboard">
+                <div className="offer-loading">
                     <img src={loadingSpinner} alt="loading animation" className="offers-list-loading"/>
                 </div>
             ) 

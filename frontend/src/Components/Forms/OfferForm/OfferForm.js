@@ -11,7 +11,7 @@ import '../Form.css';
 import '../OfferForm.css';
 
 import offerFormHandler from '../offerFormHandler';
-import { setAuthHeader } from '../../../../utils/setAuthHeader';
+import { setAuthHeader } from '../../../utils/setAuthHeader';
 
 class AddOfferForm extends React.Component {
     constructor(props){
@@ -28,7 +28,6 @@ class AddOfferForm extends React.Component {
             favRating: 0,
             description: ""
         }
-        this.id = this.props.id ? this.props.id : null;
         this.title = this.props.id ? "Edit offer" : "Add new offer";
         this.btnText = this.props.id ? "Save" : "Add";
 
@@ -55,7 +54,7 @@ class AddOfferForm extends React.Component {
         })
     }
     componentDidMount(){
-        const id = this.id;
+        const id = this.props.id;
         if(id){
             const token = this.props.token;
             fetch(`/app/get-offer-list/${id}`,{

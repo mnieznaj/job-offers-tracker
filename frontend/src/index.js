@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Home from './Components/Home/Home';
-import Done from './Components/Dashboard/Done/Done';
+import Done from './Components/Done/Done';
 import * as serviceWorker from './serviceWorker';
 
 // REDUX

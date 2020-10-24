@@ -1,5 +1,5 @@
 import React from 'react';
-import { requestSucceded } from '../../../utils/requestSucceded';
+import { requestSucceded } from '../../utils/requestSucceded';
 
 const ChangeMail = () => {
 

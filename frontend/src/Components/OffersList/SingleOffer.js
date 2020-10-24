@@ -5,8 +5,8 @@ import closeIcon from './close-icon.svg'
 
 import { Link, useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { currentOfferId } from '../../../store/actions/dashboardActions';
-import { setAuthHeader } from "../../../utils/setAuthHeader"; 
+import { currentOfferId } from '../../store/actions/dashboardActions';
+import { setAuthHeader } from "../../utils/setAuthHeader"; 
 import './SingleOffer.css';
 
 import RenderHearts from '../Forms/RenderHearts/RenderHearts';

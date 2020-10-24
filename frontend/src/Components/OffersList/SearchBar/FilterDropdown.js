@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setOffersFilter } from '../../../../store/actions/dashboardActions';
+import { setOffersFilter } from '../../../store/actions/dashboardActions';
 import { ReactComponent as Arrow } from './arrow.svg';
 
 import './FilterDropdown.css';
