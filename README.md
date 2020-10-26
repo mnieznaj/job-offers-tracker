@@ -1,5 +1,3 @@
-Up Next: deploying working demo version on Heroku (right now Heroku gives me some Authorization issues);
-
 # Idea #
 
 Project was created to help me and my friends to keeps track of job offers we apply to, as we try to emigrate to anywhere in Western Europe (thus country and city fields to track offers). I wanted something more appealing than a regular Excel document, that would be accessible from any device.
@@ -24,9 +22,10 @@ Backend:
 
 # Live Version #
 
-Live version is yet to be deployed.
+Link: https://blooming-beyond-87798.herokuapp.com/
 
-The test user only allows to download preset data. No operations on database are available.
+Login: test123@gmail.com
+Password: test123
 
 # Local Project Set-up #
 
