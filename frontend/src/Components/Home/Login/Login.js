@@ -4,17 +4,33 @@ import '../../Forms/Form.css';
 
 import { connect } from 'react-redux';
 import { setUserToken, setUserId } from '../../../store/actions/dashboardActions';
+import {Redirect} from 'react-router-dom';
 
-const Login = (props) => {
-    const login = (event) => {
-        event.preventDefault();
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        
-        const data = {
-            email,
-            password
+class Login extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            auth: false,
+            formData: {
+                email: null,
+                password: null
+            }
         }
+        this.setFormData = this.setFormData.bind(this);
+    }
+    setFormData(event){
+        const key = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            formData: {
+                ...this.state.formData,
+                [key]: value
+            }
+        })
+    }
+    login = (event) => {
+        event.preventDefault();
+        const data = {...this.state.formData};
         fetch("/users/login-user", {
             method:'POST',
             mode: 'cors',
@@ -24,38 +40,34 @@ const Login = (props) => {
         })
         .then(response => response.json())
         .then(data => {
-            props.setToken(data.token);
-            props.setUserId(data.userId);
-            window.location.href = window.location + "app";
+            if(data.token){
+                this.props.setToken(data.token);
+                this.props.setUserId(data.userId);
+                this.setState({auth: true});
+            } else {
+                document.getElementById("login-error-msg").textContent = "Incorrect credentials";
+            } 
             return data
         })
-        // .then(data => {
-        //     if(data.token && (!localStorage.getItem("token") || localStorage.getItem("token") === undefined)){
-        //         localStorage.setItem("token", data.token);
-        //         localStorage.setItem("userId", data.userId);
-                
-        //         // window.location.href = window.location + "app";
-        //     } else {
-        //         document.getElementById("login-error-msg").textContent = "Incorrect credentials";
-        //     }  
-        //     return data
-        // })
         .catch(err => console.log(err));
     }
-    return(
-        <div className="login">
-            <form className="form">
-                <h2 className="form-title">Login</h2>
-                <label className="form-label">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Enter Email" className="form-input form-homepage-input"></input>
-                <label className="form-label">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password" className="form-input form-homepage-input"></input>
-                <p id="login-error-msg" className="form-error-msg"></p>
-                <button type="Submit" onClick={(event) => login(event)}className="form-button">Login</button>
-            </form>
-            <p className="form-paragraph">Don't have an acount?<br/><span className="switch-homescreen" onClick={() => props.changeForm("register")}>Register Now!</span></p>
-        </div>
-    )
+    render(){
+        return(
+            this.state.auth ? (<Redirect to={"/app"} />) :
+            <div className="login">
+                <form className="form">
+                    <h2 className="form-title">Login</h2>
+                    <label className="form-label">E-mail</label>
+                    <input type="email" name="email" placeholder="Enter Email" className="form-input form-homepage-input" onChange={this.setFormData}/>
+                    <label className="form-label">Password</label>
+                    <input type="password" name="password" placeholder="Enter Password" className="form-input form-homepage-input"onChange={this.setFormData} />
+                    <p id="login-error-msg" className="form-error-msg"></p>
+                    <button type="Submit" onClick={this.login}className="form-button">Login</button>
+                </form>
+                <p className="form-paragraph">Don't have an acount?<br/><span className="switch-homescreen" onClick={() => this.props.changeForm("register")}>Register Now!</span></p>
+            </div>
+        )
+    }
 }
 
 const mapDispatchToProps = dispatch => {

@@ -26,7 +26,7 @@ export default function offerFormHandler(event){
         if(response.error === false){
             requestSucceded(2900);
             setTimeout(() => {
-                window.location.href = window.origin + "/app";
+                window.location= window.origin;
             }, 2900)
         }
         return response

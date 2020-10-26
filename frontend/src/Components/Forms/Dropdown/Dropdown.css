@@ -33,6 +33,7 @@
 
     border: 1px solid #ffffff;
 }
+
 .dropdown__header-title-text--active{
     border-bottom-left-radius: 0px;
 }

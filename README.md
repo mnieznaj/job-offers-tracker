@@ -1,5 +1,4 @@
-Test username: test123@gmail.com
-Test password: test123
+Up Next: deploying working demo version on Heroku (right now Heroku gives me some Authorization issues);
 
 # Idea #
 
@@ -34,4 +33,6 @@ The test user only allows to download preset data. No operations on database are
 The Backend is currently setup for local development with proxy set for front-back connection (setting up CORS not knowing earlier that smth like this exist was a nightmare, but I managed to make it work ^^).
 
 To start frontend - type "npm start" in frontend destination folder.
-To start backend - type "nodemon server" in backend/fake_api destination folder.
+To start backend - type "nodemon server" in backend destination folder. It allows you to register a user, log in, add, edit and remove offers. !REMEMBER TO ADD YOUR OWN DATABASE!
+
+Fake API backend version allows, to only log in and access the data. It was prepared only for live demonastration purposes.

@@ -6,11 +6,8 @@ import logoutIcon from './logout-icon.svg';
 
 const ProfileInfo = (props) => {
     const logout = () => {
-        // localStorage.removeItem("token");
-        // localStorage.removeItem("userId");
-        // localStorage.removeItem("dbId");
         props.deleteToken();
-        window.location.reload();
+        window.location = window.location.origin;
     }
     let { url } = useRouteMatch();
     return(

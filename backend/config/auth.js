@@ -60,15 +60,3 @@ passport.use(new JWTstrategy({
     done(error);
   }
 }));
-
-// module.exports = {
-//     ensureAuthenticated: (req, res, next) => {
-//         if(req.isAuthenticated()){
-//             return next();
-//         }
-//         // error message;
-//         // tutaj jest problem z redirectem
-//         res.send({msg: "not authenticated"}).redirect('/users/login');
-//     }
-//     // add it to all the routes, you want to be protected
-// }

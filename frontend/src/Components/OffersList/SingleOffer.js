@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../Forms/Dropdown/Dropdown';
+// import Dropdown from '../Forms/Dropdown/DropdownSinglePageStatus';
 import editIcon from './edit-icon.svg';
 import closeIcon from './close-icon.svg'
 
@@ -50,7 +50,7 @@ const SingleOffer = (props) => {
                         <span className="offer-body__header-section--rating heart-icons">
                             <RenderHearts heartsNo={data.favRating} />
                         </span>
-                        <Dropdown keyId={data._id} clss="offer-body__header-section--status" status={data.status} />
+                        <div className="offer-body__header-section-status">{data.status}</div>
                     </span>
                     <span className="offer-body__section-wrap">
                         <span className="offer-body__location-section">
