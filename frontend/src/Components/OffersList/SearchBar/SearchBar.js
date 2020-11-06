@@ -8,20 +8,29 @@ const SearchBar = (props) => {
         const search = document.getElementById("search-bar");
         const term = search.value.trim().toLowerCase();
         const results = document.querySelector(".offers-list");
-        console.log(results);
 
         Array.from(results.children)
-        .filter((result) => !result.querySelector(".offer-body__header-section--title").textContent.toLowerCase().includes(term))
-        .forEach((result) => result.classList.add('filtered'));
+            .filter(result => {
+                return (
+                    !result.querySelector(".offer-body__header-section-title").textContent.toLowerCase().includes(term) ||
+                    !result.querySelector(".offer-body__header-section-status").textContent.toLowerCase().includes(term) ||
+                    !result.querySelector(".offer-body__location-section-company").textContent.toLowerCase().includes(term) ||
+                    !result.querySelector(".offer-body__location-section-location").textContent.toLowerCase().includes(term)
+                )
+            })
+            .forEach(result => result.classList.add('filtered'));
 
         console.log("results filtered" + results);
 
         Array.from(results.children)
-            .filter((result) => {
+            .filter(result => {
                 console.log(result);
-                return result.querySelector(".offer-body__header-section--title").textContent.toLowerCase().includes(term)}
-            )
-            .forEach((result) => result.classList.remove('filtered'));
+                return result.querySelector(".offer-body__header-section-title").textContent.toLowerCase().includes(term) ||
+                result.querySelector(".offer-body__header-section-status").textContent.toLowerCase().includes(term) ||
+                result.querySelector(".offer-body__location-section-company").textContent.toLowerCase().includes(term) ||
+                result.querySelector(".offer-body__location-section-location").textContent.toLowerCase().includes(term)
+            })
+            .forEach(result => result.classList.remove('filtered'));
     }
     return(
         <form className="search-bar">

@@ -3,34 +3,14 @@ import './Login.css';
 import '../../Forms/Form.css';
 
 import { connect } from 'react-redux';
-import { setUserToken, setUserId } from '../../../store/actions/dashboardActions';
-import {Redirect} from 'react-router-dom';
+import { setUserToken, setUserId, setAuth } from '../../../store/actions/dashboardActions';
+import { Redirect } from 'react-router-dom';
+import { Formik, Field, Form } from 'formik';
 
-class Login extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            auth: false,
-            formData: {
-                email: null,
-                password: null
-            }
-        }
-        this.setFormData = this.setFormData.bind(this);
-    }
-    setFormData(event){
-        const key = event.target.name;
-        const value = event.target.value;
-        this.setState({
-            formData: {
-                ...this.state.formData,
-                [key]: value
-            }
-        })
-    }
-    login = (event) => {
-        event.preventDefault();
-        const data = {...this.state.formData};
+const Login = (props) => {
+    
+    const login = (values) => {
+        const data = {...values};
         fetch("/users/login-user", {
             method:'POST',
             mode: 'cors',
@@ -41,9 +21,9 @@ class Login extends React.Component {
         .then(response => response.json())
         .then(data => {
             if(data.token){
-                this.props.setToken(data.token);
-                this.props.setUserId(data.userId);
-                this.setState({auth: true});
+                props.setToken(data.token);
+                props.setUserId(data.userId);
+                props.setAuth(true);
             } else {
                 document.getElementById("login-error-msg").textContent = "Incorrect credentials";
             } 
@@ -51,30 +31,48 @@ class Login extends React.Component {
         })
         .catch(err => console.log(err));
     }
-    render(){
         return(
-            this.state.auth ? (<Redirect to={"/app"} />) :
+            props.auth ? (<Redirect to={"/app"} />) :
             <div className="login">
-                <form className="form">
-                    <h2 className="form-title">Login</h2>
-                    <label className="form-label">E-mail</label>
-                    <input type="email" name="email" placeholder="Enter Email" className="form-input form-homepage-input" onChange={this.setFormData}/>
-                    <label className="form-label">Password</label>
-                    <input type="password" name="password" placeholder="Enter Password" className="form-input form-homepage-input"onChange={this.setFormData} />
-                    <p id="login-error-msg" className="form-error-msg"></p>
-                    <button type="Submit" onClick={this.login}className="form-button">Login</button>
-                </form>
-                <p className="form-paragraph">Don't have an acount?<br/><span className="switch-homescreen" onClick={() => this.props.changeForm("register")}>Register Now!</span></p>
+                <Formik
+                    initialValues= {{
+                        email: "",
+                        password: ""
+                    }}
+                    onSubmit={
+                        (values) => {
+                            login(values)
+                        }
+                    }>
+                    <Form className="form">
+                        <h2 className="form-title">Login</h2>
+                        <label className="form-label" htmlFor="email">E-mail</label>
+                        <Field type="email" name="email" placeholder="Enter Email" className="form-input form-homepage-input" />
+
+                        <label className="form-label" htmlFor="password">Password</label>
+                        <Field type="password"  placeholder="Enter Password" className="form-input form-homepage-input" name="password"/>
+
+                        <p id="login-error-msg" className="form-error-msg"></p>
+                        <button type="submit" className="form-button">Login</button>
+                    </Form>
+                </Formik>
+                <p className="form-paragraph">Don't have an acount?<br/><span className="switch-homescreen" onClick={() => props.changeForm("register")}>Register Now!</span></p>
             </div>
         )
+}
+
+const mapStatetoProps = state => {
+    return {
+        auth: state.auth
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         setToken: (token) => dispatch(setUserToken(token)),
-        setUserId: (id) => dispatch(setUserId(id))
+        setUserId: (id) => dispatch(setUserId(id)),
+        setAuth: (bool) => dispatch(setAuth(bool))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStatetoProps, mapDispatchToProps)(Login);

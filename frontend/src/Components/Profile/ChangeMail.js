@@ -22,7 +22,7 @@ class ChangeMail extends React.Component {
                     <input type="email" id="new-email" className="form-input"/>
                     <label className="form-label">Repeat new email</label>
                     <input type="email" id="rep-new-email" className="form-input"/>
-                    <button type="submit" className="profile__form-button" onClick={this.redirectToProfile}>Save &gt;</button>
+                    <button type="submit" className="profile__form-button" onClick={this.redirectToProfile}>Save {/*<img className="btn-arrow-icon" src="/icons/arrow.svg"/>*/}</button>
                 </span>
             </form>
         )

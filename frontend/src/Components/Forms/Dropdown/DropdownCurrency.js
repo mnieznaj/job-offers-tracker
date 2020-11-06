@@ -2,7 +2,7 @@ import React from 'react';
 import Countries from '../countries.json';
 import './Dropdown.css';
 import './DropdownCurrency.css';
-import arrow from './arrow.svg';
+// import arrow from './arrow.svg';
 
 class Dropdown extends React.Component {
     constructor(props){
@@ -37,7 +37,7 @@ class Dropdown extends React.Component {
                     <div className="dropdown__header-title" >
                         <input value={this.props.value} name="paygrade" className="dropdown__header-title-text currency-input" onChange={this.props.paygradeHandler} placeholder={this.props.paygrade}/>
                         <button className="dropdown__header-title-button currency-list-btn" type="button" onClick={this.toggleList}>
-                            {this.props.currency !== "" ? this.props.currency : <img src={arrow} alt=""/>}
+                            {this.props.currency !== "" ? this.props.currency : <img src="/icons/arrow.svg" alt="arrow icon" className={"dropdown_arrow-icon " + (this.state.listOpen ? "rotate-180" : null)}/>}
                         </button>
                     </div>
                 </div>

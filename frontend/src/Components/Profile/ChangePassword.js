@@ -22,7 +22,7 @@ class ChangePassword extends React.Component {
                     <input type="password" id="new-pass" className="form-input"/>
                     <label className="form-label">Repeat new password</label>
                     <input type="password" id="rep-new-pass" className="form-input"/>
-                    <button type="submit" className="profile__form-button" onClick={this.redirectToProfile}>Save &gt;</button>
+                    <button type="submit" className="profile__form-button" onClick={this.redirectToProfile}>Save {/*<img className="btn-arrow-icon" src="/icons/arrow.svg"/>*/}</button>
                 </span>
             </form>
         )

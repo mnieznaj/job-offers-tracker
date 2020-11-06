@@ -14,6 +14,7 @@
     width: 100%;
     font-size: 24px;
     overflow-y: hidden;
+    color: #585B67;
 }
 .search-bar__sorter{
     width: 300px;

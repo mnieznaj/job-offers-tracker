@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Login from './Login/Login';
@@ -31,16 +31,22 @@ class Home extends Component {
                 <button onClick={() => this.setForm("register")}>Register</button>
             </div>
         );
+        const userHandler = (this.state.form === "login" 
+            ? <Login changeForm={this.setForm}/> 
+            : this.state.form === "register" 
+            ? <Register changeForm={this.setForm}/> 
+            : homeHandler
+        );
         return (
             <div className="landing-page">
-                {this.props.token ? <Redirect to="/app/"/> : null}
+                {/* {this.props.token && <Redirect to="/app/"/>} */}
                 <div className="lp-info">
                     <img className="lp-info__animation" src={homeGif} alt="animation"/>
                     <p className="lp-info__p">Can't keep track of<br/> all job offers you<br/> applied to?</p>
                     <a href="#landingpage-forms" className="lp-goto-forms">V</a>
                 </div>
                 <div id="landingpage-forms" className="lp-user-handler">
-                    {this.state.form === "login" ? <Login changeForm={this.setForm}/> : this.state.form === "register" ? <Register changeForm={this.setForm}/> : homeHandler}
+                    {userHandler}
                 </div>
             </div>
         )

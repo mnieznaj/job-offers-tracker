@@ -37,3 +37,9 @@ export const setUserId = id => {
         id: id
     }
 }
+export const setAuth = auth => {
+    return {
+        type: actionTypes.SET_AUTH,
+        auth: auth
+    }
+}

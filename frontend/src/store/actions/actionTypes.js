@@ -7,3 +7,4 @@ export const DELETE_USER_TOKEN = "DELETE_USER_TOKEN";
 export const OFFERS_FILTER = "OFFERS_FILTER";
 
 export const SET_USER_ID = "SET_USER_ID";
+export const SET_AUTH = "SET_AUTH";

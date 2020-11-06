@@ -49,13 +49,17 @@
     grid-area: header;
 }
 
-.offer-body__header-section--title{
+.offer-body__header-section-title{
     font-family: 'Bree Serif', serif;
     font-size: 44px;
     margin-bottom: 15px;
 }
+.offer-body__header-section-link{
+    text-decoration: none;
+    color: #131C48;
+}
 
-.offer-body__header-section--rating{
+.offer-body__header-section-rating{
     display: inline-block;
     margin-bottom: 15px;
 }
@@ -94,17 +98,13 @@
     margin-bottom: 10px;
 }
 
-.offer-body__location-section--company{
+.offer-body__location-section-company{
     font-weight: 600;
     font-size: 24px;
     color: #2E365C;
 }
 
-/* .offer-body__location-section--paygrade{
-
-} */
-
-.offer-body__location-section--location > a{
+.offer-body__location-section-location > a{
     text-align: right;
 }
 
@@ -123,7 +123,7 @@
     grid-area: desc;
 }
 
-.offer-body__description-section--description{
+.offer-body__description-section-description{
     text-align: left;
 }
 .filtered{

@@ -18,7 +18,7 @@ class ChangeName extends React.Component {
                     <label className="form-label">New Name</label>
                     <input type="text" id="new-name" className="form-input"/>
                 </span>
-                <button type="submit" className="profile__form-button" onClick={this.redirectToProfile}>Save &gt;</button>
+        <button type="submit" className="profile__form-button" onClick={this.redirectToProfile}>Save {/*<img className="btn-arrow-icon" src="/icons/arrow.svg"/>*/}</button>
             </form>
         )
     }

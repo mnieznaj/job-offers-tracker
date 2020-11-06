@@ -2,7 +2,6 @@ import React from 'react';
 import Countries from '../countries.json';
 import './Dropdown.css';
 import './DropdownCountry.css';
-import arrow from './arrow.svg';
 
 class DropdownCountry extends React.Component {
     constructor(props){
@@ -39,7 +38,7 @@ class DropdownCountry extends React.Component {
                             {this.props.country}
                         </span>
                         <button className="dropdown__header-title-button country-list-btn" type="button" onClick={()=> this.toggleList()}>
-                            <img src={arrow} alt="arrow icon"/>
+                            <img src="/icons/arrow.svg" alt="arrow icon" className={"dropdown_arrow-icon " + (this.state.listOpen ? "rotate-180" : null)}/>
                         </button>
                     </div>
                 </div>

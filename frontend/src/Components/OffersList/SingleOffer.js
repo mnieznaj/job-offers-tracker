@@ -1,5 +1,4 @@
 import React from 'react';
-// import Dropdown from '../Forms/Dropdown/DropdownSinglePageStatus';
 import editIcon from './edit-icon.svg';
 import closeIcon from './close-icon.svg'
 
@@ -46,24 +45,25 @@ const SingleOffer = (props) => {
                 </div>
                 <div className="offer-body">
                     <span className="offer-body__header-section">
-                        <h2 className="offer-body__header-section--title">{data.title}</h2>
-                        <span className="offer-body__header-section--rating heart-icons">
+                        <h2 className="offer-body__header-section-title">
+                            <a className="offer-body__header-section-link" href={data.link} rel="noopener noreferrer" target="_blank">{data.title}</a></h2>
+                        <span className="offer-body__header-section-rating heart-icons">
                             <RenderHearts heartsNo={data.favRating} />
                         </span>
                         <div className="offer-body__header-section-status">{data.status}</div>
                     </span>
                     <span className="offer-body__section-wrap">
                         <span className="offer-body__location-section">
-                            <h3 className="offer-body__location-section--company">{data.company}</h3>
-                            <p className="offer-body__location-section--paygrade">{data.paygrade} {data.currency}</p>
-                            <p className="offer-body__location-section--location">{`${data.country}, ${data.city}`}</p>
+                            <h3 className="offer-body__location-section-company">{data.company}</h3>
+                            <p className="offer-body__location-section-paygrade">{data.paygrade} {data.currency}</p>
+                            <p className="offer-body__location-section-location">{`${data.country}, ${data.city}`}</p>
                         </span>
                         <span className="offer-body__link-section">
                             <a href={data.link} rel="noopener noreferrer" target="_blank"><LinkIcon /> Link</a>
                         </span>
                     </span>
                     <span className="offer-body__description-section">
-                        <p className="offer-body__description-section--description">{data.description}</p>
+                        <p className="offer-body__description-section-description">{data.description}</p>
                     </span>
                 </div>
             </div>

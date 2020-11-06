@@ -6,13 +6,15 @@ import OfferList from './Components/OffersList/OffersList';
 import OfferForm from './Components/Forms/OfferForm/OfferForm';
 import Nav from './Components/Nav/Nav';
 import Profile from './Components/Profile/Profile';
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 
 const App = (props) => {
     let { path } = useRouteMatch();
 
     return (
       <div className="App">
-        {!localStorage.getItem('token') ? <Redirect to="/"/> : <Redirect to="/app/dashboard"/>}
+        {props.token ? <Redirect to="/app/dashboard"/> : <Redirect to="/"/>}
+        <ScrollToTop />
         <Nav />
         <div className="container" style={{display : "flex", flexDirection : "column"}}>
             <Switch>
@@ -33,7 +35,8 @@ const App = (props) => {
 
 const mapStateToProps = state => {
   return {
-      offerId: state.currentOfferId
+      offerId: state.currentOfferId,
+      token: state.userToken
   }
 }
 

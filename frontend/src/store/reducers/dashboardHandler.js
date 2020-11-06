@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     offersList: [],
     userId: null,
-    // userToken: localStorage.getItem("token") ? localStorage.getItem("token") : null,
+    auth: false,
     userToken: null,
     currentOfferId: null,
     offersFilter: "title"
@@ -40,6 +40,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 userId: action.id
+            }
+        case actionTypes.SET_AUTH:
+            return {
+                ...state,
+                auth: action.auth
             }
         // no default
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import arrow from './arrow.svg';
+// import arrow from './arrow.svg';
 import './Dropdown.css';
 
 import statusList from "./statusList";
@@ -36,7 +36,7 @@ class Dropdown extends React.Component {
                             {this.props.status}
                         </span>
                         <button className="dropdown__header-title-button" type="button">
-                            <img src={arrow} alt="arrow icon" className={this.state.listOpen ? "rotate-180" : ""}/>
+                            <img src="/icons/arrow.svg" alt="arrow icon" className={"dropdown_arrow-icon " + (this.state.listOpen ? "rotate-180" : null)}/>
                         </button>
                     </div>
                 </div>
