@@ -16,6 +16,9 @@ require('./config/passport')(passport);
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.get('*', function(req, res) {  
+  res.redirect('https://' + req.headers.host + req.url);
+});
 
 mongoose
   .connect(dbName.offers, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -67,6 +70,15 @@ app.use(
   })
 );
 
+// react server deplyment
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 // Routes
 const users = require('./routes/users.js')
 app.use('/users', users);
@@ -76,10 +88,7 @@ const appRouter = require('./routes/app-router.js');
 app.use('/app', passport.authenticate('jwt', { session : false }), appRouter);
 
 
-// react server deplyment
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+
 
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'build', '404.html'));;

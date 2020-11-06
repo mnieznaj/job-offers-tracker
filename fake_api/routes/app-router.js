@@ -7,22 +7,23 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get("/get-offer-list/:id", (req, res) => {
-    console.log(req.params.id);
-    AddJobOffer.findById(req.params.id)
-      .then((response) => {
-        res.json(response);
-      })
-      .catch((err) => console.log(err));
-});
+// router.get("/get-offer-list/:id", (req, res) => {
+//     console.log(req.params.id);
+//     AddJobOffer.findById(req.params.id)
+//       .then((response) => {
+//         res.json(response);
+//       })
+//       .catch((err) => console.log(err));
+// });
   
-router.get("/get-offer-list", (req, res) => {
-    AddJobOffer.find()
-      .then((response) => {
-        res.json(response);
-      })
-      .catch((err) => console.log(err));
-});
+// router.get("/get-offer-list", (req, res) => {
+//     AddJobOffer.find()
+//       .then((response) => {
+//         console.log(response);
+//         res.json(response);
+//       })
+//       .catch((err) => console.log(err));
+// });
   
 router.post("/add-offer", (req, res) => {
     const offer = new AddJobOffer({offers: [req.body]});

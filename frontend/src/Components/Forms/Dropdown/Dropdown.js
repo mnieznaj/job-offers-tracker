@@ -1,5 +1,4 @@
 import React from 'react';
-// import arrow from './arrow.svg';
 import './Dropdown.css';
 
 import statusList from "./statusList";
@@ -16,6 +15,7 @@ class Dropdown extends React.Component {
           listOpen: !prevState.listOpen
         }))
     }
+    
     setHeaderTitle(value){
         this.props.handler("status", value);
         this.toggleList();

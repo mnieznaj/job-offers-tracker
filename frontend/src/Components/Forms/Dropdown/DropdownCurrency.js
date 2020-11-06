@@ -2,7 +2,6 @@ import React from 'react';
 import Countries from '../countries.json';
 import './Dropdown.css';
 import './DropdownCurrency.css';
-// import arrow from './arrow.svg';
 
 class Dropdown extends React.Component {
     constructor(props){

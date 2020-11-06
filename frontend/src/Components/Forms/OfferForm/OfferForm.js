@@ -1,5 +1,7 @@
-import React from 'react';
-import Input from '../Input/Input';
+import React, { useState, useEffect } from 'react';
+import { useFormik } from 'formik';
+
+import validate from './validateForm';
 import DropdownCurrency from '../Dropdown/DropdownCurrency';
 import DropdownCountry from '../Dropdown/DropdownCountry';
 import Dropdown from '../Dropdown/Dropdown';
@@ -13,99 +15,92 @@ import '../OfferForm.css';
 import offerFormHandler from '../offerFormHandler';
 import { setAuthHeader } from '../../../utils/setAuthHeader';
 
-class AddOfferForm extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            title: "",
-            link: "",
-            company: "",
-            country: "none",
-            city: "",
-            paygrade: "0",
-            currency: "",
-            status: "none",
-            favRating: 0,
-            description: ""
-        }
-        this.title = this.props.id ? "Edit offer" : "Add new offer";
-        this.btnText = this.props.id ? "Save" : "Add";
+const AddOfferForm = (props) => {
+    const id = props.id;
+    const title = id ? "Edit offer" : "Add new offer";
+    const btnText = id ? "Save" : "Add";
+    const addOfferValues = {
+        title: "",
+        link: "",
+        company: "",
+        country: "none",
+        city: "",
+        paygrade: "0",
+        currency: "",
+        status: "none",
+        favRating: 0,
+        description: ""
+    };
+    let [formValues, formValuesHandler] = useState(addOfferValues);
+    useEffect(() => {
+        const fetchData = async () => {
+            if(id){
+                let result;
+                fetch(`/app/get-offer-list/${id}`,{
+                    method: "GET",
+                    headers: setAuthHeader(props.token)
+                    }).then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        result = data;
+                        return data
+                    })
+                    .catch(err => console.log(err));
+                formValuesHandler(result)
+            }
+        };
+        fetchData();
+    },[])
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.offerFormHandler = offerFormHandler.bind(this);
-
-        this.setStateProperty = this.setStateProperty.bind(this);
-    }
-    getFormData(){
-        const formData = {...this.state};
-        return formData;
-    }
-    handleInputChange(event){
-        const target = event.target;
-        const name = target.name;
-        const value = target.value;
-        this.setState({
-            [name]: value
-        })
-    }
-    setStateProperty(key, value){
-        this.setState({
-            [key]: value
-        })
-    }
-    componentDidMount(){
-        const id = this.props.id;
-        if(id){
-            const token = this.props.token;
-            fetch(`/app/get-offer-list/${id}`,{
-                method: "GET",
-                headers: setAuthHeader(token)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    this.setState({...data});
-                })
-                .catch(err => console.log(err));  
-        }
+    const formik = useFormik({
+        initialValues: formValues,
+        validate,
+        onSubmit: values => offerFormHandler(values, props.token, id),
+    })
+    const formValueChange = (field, value) => {
+        formik.values[field] = value
     }
 
-    render(){
         return(
             <React.Fragment>
-            <h2 className="form-title">{this.title}</h2>
+            <h2 className="form-title">{title}</h2>
                 <div className="offer-form">
-                    <form className="offer-form__form" onSubmit={this.offerFormHandler}>
-                        <Input name="Title" update={this.handleInputChange} value={this.state.title} placeholder="Enter name"/>
+                        <form className="offer-form__form" onSubmit={formik.handleSubmit}>
+                            <label htmlFor="title" className="form-label">Title</label>
+                            <input type="text" name="title" className="form-input" placeholder="Enter name" {...formik.getFieldProps('title')}/>
 
-                        <Input name="Link" update={this.handleInputChange} value={this.state.link} placeholder="https://"/>
+                            <label htmlFor="link" className="form-label">Link</label>
+                            <input type="text" name="link" className="form-input" placeholder="https://" {...formik.getFieldProps('link')}/>
 
-                        <Input name="Company" update={this.handleInputChange} value={this.state.company} placeholder="Company name"/>
+                            <label htmlFor="company" className="form-label">Company</label>
+                            <input type="text" name="company" className="form-input" placeholder="Company name" {...formik.getFieldProps('company')}/>
 
-                        <label htmlFor="paygrade" className="form-label">Paygrade</label>
-                        <DropdownCurrency handler={this.setStateProperty} currency={this.state.currency} paygradeHandler={this.handleInputChange} paygrade={this.state.paygrade}/>
+                            <label htmlFor="paygrade" className="form-label">Paygrade</label>
+                            <DropdownCurrency handler={formValueChange} currency={formik.values.currency} paygradeHandler={formValueChange} paygrade={formik.values.paygrade}/>
 
-                        <label htmlFor="country" className="form-label">Country</label>
-                        <DropdownCountry country={this.state.country} handler={this.setStateProperty} />
+                            <label htmlFor="country" className="form-label">Country</label>
+                            <DropdownCountry country={formik.values.country} handler={formValueChange} />
 
-                        <Input name="City" update={this.handleInputChange} value={this.state.city} placeholder="City"/>
+                            <label htmlFor="city" className="form-label">City</label>
+                            <input type="text" name="city" className="form-input" placeholder="City name" {...formik.getFieldProps('city')}/>
+                            
 
-                        <label htmlFor="favRating" className="form-label">Rating</label>
-                        <span className="heart-icons">
-                            <RenderHearts handler={this.setStateProperty} heartsNo={this.state.favRating} />
-                        </span>
+                            <label htmlFor="favRating" className="form-label">Rating</label>
+                            <span className="heart-icons">
+                                <RenderHearts handler={formValueChange} heartsNo={formik.values.favRating} />
+                            </span>
 
-                        <label htmlFor="status" className="form-label">Status</label>
-                        <Dropdown status={this.state.status} handler={this.setStateProperty} />
+                            <label htmlFor="status" className="form-label">Status</label>
+                            <Dropdown status={formik.values.status} handler={formValueChange} />
 
-                        <label htmlFor="description" className="form-label">Description</label>
-                        <textarea name="description" rows="10" cols="30" className="form-description" onChange={this.handleInputChange} value={this.state.description}></textarea>
+                            <label htmlFor="description" className="form-label">Description</label>
+                            <textarea type="text" name="description" className="form-description" {...formik.getFieldProps('description')}/>
 
-                        <button type="submit" className="form-button">{this.btnText}</button>
-                    </form>
+                            <button type="submit" className="form-button">{btnText}</button>
+                        </form>
                 </div>
             </React.Fragment>
         )
-    }
 }
 const mapStateToProps = state => {
     return {
