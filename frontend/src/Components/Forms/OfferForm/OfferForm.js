@@ -32,11 +32,13 @@ const AddOfferForm = (props) => {
         description: ""
     };
     let [formValues, formValuesHandler] = useState(addOfferValues);
+
     useEffect(() => {
         const fetchData = async () => {
+            console.log("id: " + id);
             if(id){
                 let result;
-                fetch(`/app/get-offer-list/${id}`,{
+                await fetch(`/app/get-offer-list/${id}`,{
                     method: "GET",
                     headers: setAuthHeader(props.token)
                     }).then(response => response.json())
@@ -46,11 +48,12 @@ const AddOfferForm = (props) => {
                         return data
                     })
                     .catch(err => console.log(err));
-                formValuesHandler(result)
+                formValuesHandler(result);
+                console.log("formValues state: " + formValues);
             }
         };
         fetchData();
-    },[])
+    },[]);
 
     const formik = useFormik({
         initialValues: formValues,
