@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import FormError from '../../../utils/FormError';
 
-import validate from './validateForm';
+import validateForm from './validateForm';
 import DropdownCurrency from '../Dropdown/DropdownCurrency';
 import DropdownCountry from '../Dropdown/DropdownCountry';
 import Dropdown from '../Dropdown/Dropdown';
@@ -15,7 +16,7 @@ import '../OfferForm.css';
 import offerFormHandler from '../offerFormHandler';
 import { setAuthHeader } from '../../../utils/setAuthHeader';
 
-const AddOfferForm = (props) => {
+const OfferForm = (props) => {
     const id = props.id;
     const title = id ? "Edit offer" : "Add new offer";
     const btnText = id ? "Save" : "Add";
@@ -34,20 +35,20 @@ const AddOfferForm = (props) => {
     }
 
     useEffect(() => {
+        if(id){
         const fetchData = async () => {
-            if(id){
                 let result = await fetch(`/app/get-offer-list/${id}`,{
                     method: "GET",
                     headers: setAuthHeader(props.token)
                     }).then(response => response.json())
                     .catch(err => console.log(err));
                 formValuesHandler(result);
-            } else {
-                formValuesHandler(emptyValues)
-            }
-        };
-        fetchData();
-    });
+            };
+            fetchData();
+        } else {
+            formValuesHandler(emptyValues)
+        }
+    },[]);
 
         return(
             <React.Fragment>
@@ -58,26 +59,38 @@ const AddOfferForm = (props) => {
                     customChange={(formik, field, value) => {
                         formik.values[field] = value
                     }}
-                    validate={validate}
+                    validate={validateForm}
                     onSubmit={values => offerFormHandler(values, props.token, id)}
                     >
                         {formik => (
                         <form className="offer-form__form" onSubmit={formik.handleSubmit}>
+                            <FormError>
+                                <ErrorMessage name="title"/>
+                            </FormError>
                             <label htmlFor="title" className="form-label">Title</label>
                             <input type="text" name="title" className="form-input" placeholder="Enter name" {...formik.getFieldProps('title')}/>
 
+                            <FormError>
+                                <ErrorMessage name="link" />
+                            </FormError>
                             <label htmlFor="link" className="form-label">Link</label>
                             <input type="text" name="link" className="form-input" placeholder="https://" {...formik.getFieldProps('link')}/>
 
                             <label htmlFor="company" className="form-label">Company</label>
                             <input type="text" name="company" className="form-input" placeholder="Company name" {...formik.getFieldProps('company')}/>
 
+                            <FormError>
+                                <ErrorMessage name="paygrade"/>
+                            </FormError>
                             <label htmlFor="paygrade" className="form-label">Paygrade</label>
                             <DropdownCurrency handler={formik.setFieldValue} currency={formik.values.currency} paygradeHandler={formik.handleChange} paygrade={formik.values.paygrade}/>
 
                             <label htmlFor="country" className="form-label">Country</label>
                             <DropdownCountry country={formik.values.country} handler={formik.setFieldValue} />
 
+                            <FormError>
+                                <ErrorMessage name="city"/>
+                            </FormError>
                             <label htmlFor="city" className="form-label">City</label>
                             <input type="text" name="city" className="form-input" placeholder="City name" {...formik.getFieldProps('city')}/>
                             
@@ -87,6 +100,9 @@ const AddOfferForm = (props) => {
                                 <RenderHearts handler={formik.setFieldValue} heartsNo={formik.values.favRating} />
                             </span>
 
+                            <FormError>
+                                <ErrorMessage name="status"/>
+                            </FormError>
                             <label htmlFor="status" className="form-label">Status</label>
                             <Dropdown status={formik.values.status} handler={formik.setFieldValue} />
 
@@ -108,4 +124,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(AddOfferForm);
+export default connect(mapStateToProps)(OfferForm);

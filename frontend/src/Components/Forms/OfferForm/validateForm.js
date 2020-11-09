@@ -10,7 +10,7 @@ const validateFrom = values => {
     if(!values.link){
         errors.link = 'Required'
     }
-    
+
     if(!/^[0-9]*$/.test(values.paygrade)){
         errors.paygrade = "Only numbers allowed";
     }
@@ -20,7 +20,11 @@ const validateFrom = values => {
     
     if(!values.status){
         errors.status = 'Required'
+    } else if (values.status !== "none" || values.status !== "applied" || values.status !== "rejected" || values.status !== "succeded"){
+        errors.status = "Wrong status"
     }
+
+    return errors;
 }
 
 export default validateFrom;
