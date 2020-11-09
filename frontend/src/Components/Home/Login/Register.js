@@ -2,7 +2,7 @@ import React from 'react';
 import './Register.css';
 import '../../Forms/Form.css';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-
+import FormError from '../../../utils/FormError';
 
 const Register = props => {
     const register = (values) => {
@@ -66,27 +66,27 @@ const Register = props => {
 
                     <Form className="form">
                         <h2 className="form-title">Register</h2>
-                        <span className="form-error-msg">
+                        <FormError>
                             <ErrorMessage name="name" />
-                        </span>
+                        </FormError>
                         <label className="form-label" htmlFor="name">Name</label>
                         <Field type="text" name="name" placeholder="Enter Name" className="form-input form-homepage-input"/>
 
-                        <span className="form-error-msg">
+                        <FormError>
                             <ErrorMessage name="email"/>
-                        </span>
+                        </FormError>
                         <label className="form-label" htmlFor="email">E-mail</label>
                         <Field type="email" name="email" placeholder="Enter Email" className="form-input form-homepage-input"/>
 
-                        <span className="form-error-msg">
+                        <FormError>
                             <ErrorMessage name="password"/>
-                        </span>
+                        </FormError>
                         <label className="form-label" htmlFor="password">Password</label>
                         <Field type="password" name="password" placeholder="Enter Password" className="form-input form-homepage-input"/>
 
-                        <span className="form-error-msg">
+                        <FormError>
                             <ErrorMessage name="repeatPassword"/>
-                        </span>
+                        </FormError>
                         <label className="form-label" htmlFor="repeatPassword">Repeat Password</label>
                         <Field type="password" name="repeatPassword" placeholder="Repeat Password" className="form-input form-homepage-input"/>
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setOffersFilter } from '../../../store/actions/dashboardActions';
-import { ReactComponent as Arrow } from './arrow.svg';
 
 import './FilterDropdown.css';
 
@@ -26,7 +25,11 @@ class FilterDropdown extends React.Component {
                     <div className="filter-dropdown__header-title" >
                         <span className="filter-dropdown__header-title-text">
                             sort
-                            <button className={"filter-dropdown__header-title-btn " + (this.state.listOpen ? "filter-dropdown__header-title-btn--rotate": "")} type="button"><Arrow /></button>
+                            <button className={"filter-dropdown__header-title-btn " + (this.state.listOpen ? "filter-dropdown__header-title-btn--rotate": "")} type="button">
+                                <svg className="filter-dropdown__arrow" width="20" height="34" viewBox="0 0 20 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 32L17 17L2 2" stroke="white" strokeWidth="3"/>
+                                </svg>
+                            </button>
                         </span>
                     </div>
                 </div>

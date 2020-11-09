@@ -7,6 +7,24 @@ import { setUserToken, setUserId, setAuth } from '../../../store/actions/dashboa
 import { Redirect } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 
+const validate = values => {
+    const errors = {}
+
+    if(!values.email){
+        errors.email = "Required"
+    } else if (values.email.lenght > 30){
+        errors.email = "Email must have less than 30 characters"
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
+        errors.email = "Invalid email format"
+    }
+
+    if(!values.password){
+        errors.password = "Required"
+    }
+
+    return errors;
+}
+
 const Login = (props) => {
     
     const login = (values) => {
@@ -39,8 +57,9 @@ const Login = (props) => {
                         email: "",
                         password: ""
                     }}
+                    validate={validate}
                     onSubmit={
-                        (values) => {
+                        values => {
                             login(values)
                         }
                     }>

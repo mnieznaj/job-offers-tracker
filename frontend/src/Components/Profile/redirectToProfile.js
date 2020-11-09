@@ -1,7 +1,6 @@
 import { requestSucceded } from '../../utils/requestSucceded';
 
-function redirectToProfile(e){
-    e.preventDefault();
+function redirectToProfile(){
     requestSucceded(2900);
     setTimeout(() => {
         this.setState({redirect: true});
